@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 class Conta:
-    """Conta representa uma conta bancária
+    """Conta representa uma conta bancária.
     
     Attributes:
         numero (str): Número identificador da conta.
@@ -15,6 +15,8 @@ class Conta:
 
     def __init__(self, numero: int, titular: str) -> None:
         """
+        Inicializa uma conta.
+
         Args:
             numero (int): Número da conta.
             titular (str): Títular da conta.
@@ -110,7 +112,7 @@ class Conta:
             conta_destino.depositar(valor)
             print("Trasferência realizada com sucesso!")
 
-    def exibir_extrato(self):
+    def exibir_extrato(self) -> None:
         """Exibe o extrato da conta na tela."""
         print(f"Número da conta: {self.numero}.\nSaldo: {self.saldo:.2f}.\nLimite: {self.__limite:.2f}")
 
