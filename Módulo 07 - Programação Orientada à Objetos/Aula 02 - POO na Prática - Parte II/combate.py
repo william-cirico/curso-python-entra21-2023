@@ -11,7 +11,7 @@ class Combate:
     """
 
 
-    def __init__(self, personagem1: Personagem, personagem2: Personagem):
+    def __init__(self, personagem1: Personagem, personagem2: Personagem) -> None:
         """
         Inicializa um objeto Combate.
 
@@ -28,7 +28,7 @@ class Combate:
         self.personagem1 = personagem1
         self.personagem2 = personagem2
 
-    def iniciar_combate(self):
+    def iniciar_combate(self) -> None:
         """Inicia o combate entre os dois personagens."""
         print(f"Início do combate entre {self.personagem1} e {self.personagem2}!")
 

@@ -11,7 +11,7 @@ class Guerreiro(Personagem):
         vida (int): A quantidade de vida do guerreiro.
         forca (int): A quantidade de força do guerreiro.
     """
-    def __init__(self, nome, nivel, vida, forca):
+    def __init__(self, nome, nivel, vida, forca) -> None:
         """
         Inicializa um objeto Guerreiro.
 
@@ -24,12 +24,12 @@ class Guerreiro(Personagem):
         super().__init__(nome, nivel, vida)
         self.forca = forca
 
-    def atacar(self):
+    def atacar(self) -> None:
         """Realiza a ação de ataque do guerreiro."""
         super().atacar()
         print(f"{self.nome} desfere um golpe com {self.forca} de força!")
     
-    def equipar_escudo(self):
+    def equipar_escudo(self) -> None:
         """Realiza a ação de equipar o escudo do guerreiro."""
         print(f"{self.nome} equipa o seu escudo! A vida de {self.nome} aumentou.")
 

@@ -11,7 +11,7 @@ class Mago(Personagem):
         vida (int): A quantidade de vida do mago.
         magia (int): A quantidade de magia do mago.
     """
-    def __init__(self, nome, nivel, vida, magia):
+    def __init__(self, nome, nivel, vida, magia) -> None:
         """
         Inicializa um objeto Mago.
 
@@ -24,12 +24,12 @@ class Mago(Personagem):
         super().__init__(nome, nivel, vida)
         self.magia = magia
 
-    def atacar(self):
+    def atacar(self) -> None:
         """Realiza a ação de ataque do mago."""
         super().atacar()
         print(f"{self.nome} lança um feitiço poderoso com {self.magia} de magia!")
     
-    def equipar_cajado(self):
+    def equipar_cajado(self) -> None:
         """Realiza a ação de equipar o cajado do mago."""
         print(f"{self.nome} equipa o seu cajado! O próximo ataque causará dano em área.")
 

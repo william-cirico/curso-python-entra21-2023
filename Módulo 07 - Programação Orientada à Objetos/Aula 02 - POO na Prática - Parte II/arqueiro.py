@@ -11,7 +11,7 @@ class Arqueiro(Personagem):
         vida (int): A quantidade de vida do arqueiro.
         precisao (int): A quantidade de precisão do arqueiro.
     """
-    def __init__(self, nome, nivel, vida, precisao):
+    def __init__(self, nome, nivel, vida, precisao) -> None:
         """
         Inicializa um objeto Arqueiro.
 
@@ -24,12 +24,12 @@ class Arqueiro(Personagem):
         super().__init__(nome, nivel, vida)
         self.precisao = precisao
 
-    def atacar(self):
+    def atacar(self) -> None:
         """Realiza a ação de ataque do arqueiro."""
         super().atacar()
         print(f"{self.nome} dispara uma flecha com {self.precisao} de precisão!")
     
-    def equipar_arco(self):
+    def equipar_arco(self) -> None:
         """Realiza a ação de equipar o arco do arqueiro."""
         print(f"{self.nome} equipa o seu arco! O próximo ataque de {self.nome} causará dano adicional.")
     
