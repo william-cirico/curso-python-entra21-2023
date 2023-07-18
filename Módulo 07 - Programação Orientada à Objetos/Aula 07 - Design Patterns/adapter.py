@@ -54,7 +54,7 @@ def processar_pagamento(processador_pagamento: IProcessadorPagamento) -> None:
     Args:
         processador_pagamento (IProcessadorPagamento): Processador do pagamento.
     """
-    processador_pagamento.processar_pagamento(100);
+    processador_pagamento.processar_pagamento(100)
 
 if __name__ == "__main__":
     biblioteca_antiga = BibliotecaPagamentoAntiga()
