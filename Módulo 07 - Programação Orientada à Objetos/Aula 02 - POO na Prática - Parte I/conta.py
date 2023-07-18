@@ -75,7 +75,7 @@ class Conta:
         """Deposita um valor no saldo da conta.
         
         Args:
-            valor: Valor do depósito.
+            valor (float): Valor do depósito.
         """
         self.__saldo += valor
 
@@ -83,7 +83,7 @@ class Conta:
         """Saca um valor da conta se o saldo + limite for maior ou igual ao valor de saque.
         
         Args:
-            valor: Valor do saque.
+            valor (float): Valor do saque.
 
         Returns:
             True se for bem-sucedido, False caso contrário.
@@ -105,8 +105,8 @@ class Conta:
         for maior ou igual ao valor de saque.
 
         Args:
-            valor: Valor da trasferência.
-            conta_destino: Conta de destino da trasferência.
+            valor (float): Valor da trasferência.
+            conta_destino (Conta): Conta de destino da trasferência.
         """
         if (self.sacar(valor)):
             conta_destino.depositar(valor)
