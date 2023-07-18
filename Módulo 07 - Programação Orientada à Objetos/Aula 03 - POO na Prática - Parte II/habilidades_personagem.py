@@ -1,7 +1,7 @@
 """Implementação da interface HabilidadesPersonagem"""
 from abc import ABC, abstractmethod
 
-class HabilidadesPersonagem(ABC):
+class IHabilidadesPersonagem(ABC):
     """
     HabilidadesPersonagem é uma interface que define habilidades que todo
     personagem deve ter.

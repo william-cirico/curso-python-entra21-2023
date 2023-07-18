@@ -1,8 +1,8 @@
 """Implementação da classe Personagem"""
 from abc import ABC # Precisamos utilizar ABC para definir uma classe abstrata
-from habilidades_personagem import HabilidadesPersonagem
+from habilidades_personagem import IHabilidadesPersonagem
 
-class Personagem(HabilidadesPersonagem, ABC):
+class Personagem(IHabilidadesPersonagem, ABC):
     """Personagem representa um personagem no jogo.
     
     Attributes:
