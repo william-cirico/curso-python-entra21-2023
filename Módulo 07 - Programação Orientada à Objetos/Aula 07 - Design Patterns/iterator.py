@@ -31,6 +31,6 @@ class Numeros(Iterable):
 
 
 if __name__ == "__main__":
-    numeros = Numeros(1, 2, 3, 4, 5)
-    for numero in numeros:
-        print(numero)
+    lista_numeros = Numeros(1, 2, 3, 4, 5)
+    for n in lista_numeros:
+        print(n)
