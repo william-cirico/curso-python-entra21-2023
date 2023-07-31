@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulários HTML</title>
+</head>
+<body>
+    <h1>Formulários</h1>
+
+    <!-- 
+        Um formulário é utilizado para coletar informações 
+        do usuário.
+
+        MÉTODOS:
+        * GET:
+            - Os dados vão aparecer na URL (Query String)
+            - Nunca utilizar para dados importantes.
+            - Limite de caracteres
+        * POST:
+            - Os dados são enviados através do corpo da requisição HTTP
+            - Pode ser usado para mandar uma quantidade maior de dados.
+    -->
+    <form action="backend/login.js" method="GET" autocomplete="off">
+        <!-- 
+            Dentro do formulário são utilizados inputs
+            de diferentes tipos para obter essas informações.
+        -->
+        <label for="email">E-mail</label><br>
+        <input type="text" name="email" id="email" placeholder="digite o seu email"><br>        
+        
+        <label for="senha">Senha</label><br>
+        <input type="password" name="senha" id="senha" placeholder="digite sua senha"><br><br>
+        
+        <input type="submit" value="Login">
+        
+        <input type="reset" value="Limpar">
+        <br><br><br>        
+    </form>
+
+    <form action="backend/cadastro.js" method="POST">
+        <label for="email2">E-mail</label><br>
+        <input type="email" name="email" id="email2" required><br>
+        
+        <label for="dataNascimento">Data de nascimento:</label><br>        
+        <input type="date" name="dataNascimento" id="dataNascimento" min="1930-01-01" max="2020-06-02"><br>        
+        
+        <label for="tempo">Hora de nascimento:</label><br>
+        <input type="time" name="tempo" id="tempo"><br>
+        
+        <label for="foto">Foto:</label><br>
+        <input type="file" name="foto" id="foto"><br>
+
+        <p>Escolha seu sexo:</p>
+        <input type="radio" name="sexo" id="masculino" value="masculino">
+        <label for="masculino">Masculino</label><br>
+        
+        <input type="radio" name="sexo" id="feminino" value="feminino">   
+        <label for="feminino">Feminino</label>
+        <br>
+        
+        <p>Selecione as linguagens que você conhece:</p>
+        <input type="checkbox" name="csharp" id="csharp">
+        <label for="csharp">C#</label><br>
+        <input type="checkbox" name="java" id="java">
+        <label for="java">Java</label><br>
+        <input type="checkbox" name="python" id="python">
+        <label for="python">Python</label><br>
+        <input type="checkbox" name="javascript" id="javascript">
+        <label for="javascript">Javascript</label><br>
+        <input type="checkbox" name="ruby" id="ruby">
+        <label for="ruby">Ruby</label><br>
+        <input type="checkbox" name="go" id="go">
+        <label for="go">Go</label><br>
+        <input type="checkbox" name="php" id="php">
+        <label for="php">PHP</label><br><br>
+
+        <label for="estado">Escolha o estado:</label>
+
+        <fieldset>
+            <legend>Estados</legend>
+            <select name="estado" id="estado">
+                <option value="" selected disabled>Selecione uma opção</option>
+                <option value="AC">Acre</option>
+                <option value="AL">Alagoas</option>
+                <option value="AP">Amapá</option>
+                <option value="AM">Amazonas</option>
+                <option value="BA">Bahia</option>
+                <option value="CE">Ceará</option>
+                <option value="DF">Distrito Federal</option>
+                <option value="ES">Espírito Santo</option>
+                <option value="GO">Goiás</option>
+                <option value="MA">Maranhão</option>
+                <option value="MT">Mato Grosso</option>
+                <option value="MS">Mato Grosso do Sul</option>
+                <option value="MG">Minas Gerais</option>
+                <option value="PA">Pará</option>
+                <option value="PB">Paraíba</option>
+                <option value="PR">Paraná</option>
+                <option value="PE">Pernambuco</option>
+                <option value="PI">Piauí</option>
+                <option value="RJ">Rio de Janeiro</option>
+                <option value="RN">Rio Grande do Norte</option>
+                <option value="RS">Rio Grande do Sul</option>
+                <option value="RO">Rondônia</option>
+                <option value="RR">Roraima</option>
+                <option value="SC">Santa Catarina</option>
+                <option value="SP">São Paulo</option>
+                <option value="SE">Sergipe</option>
+                <option value="TO">Tocantins</option>
+            </select>
+        </fieldset>
+        <br><br>
+        <label for="mensagem">Informações adicionais:</label><br>
+        <textarea name="mensagem" id="mensagem" cols="30" rows="10" placeholder="Mensagem" ></textarea><br><br> 
+
+        <input type="button" value="Teste">
+        <input type="submit" value="Cadastrar">
+    </form>
+</body>
+</html>
