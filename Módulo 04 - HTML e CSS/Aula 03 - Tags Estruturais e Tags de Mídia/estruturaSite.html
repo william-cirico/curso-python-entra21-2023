@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seções básicas de um site</title>
+</head>
+<body>
+    <!-- 
+        <header>
+        Representa um grupo de conteúdo introdutório. Se ele for um elemento filho do <body>, 
+        Ele é um header global da página do site, mas se for um elemento filho de um 
+        <article> ou <section>, é definido como um header específico para essa seção.
+     -->
+    <header>
+        <h1>Cabeçalho</h1>
+    </header>
+    
+    <!-- 
+        <nav>
+        Contém a funcionalidade principal de navegação da página. 
+        Links secundários, etc., não iria na navegação.
+    -->
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Página 1</a></li>
+            <li><a href="#">Página 2</a></li>
+            <li><a href="#">Página 3</a></li>
+        </ul>
+        <form action="backend/pesquisa.js">
+            <input type="search" name="pesquisa" placeholder="Pesquisar...">
+            <input type="submit" value="Pesquisar">
+        </form>
+    </nav>
+
+    <!-- 
+        <main>
+        É para o conteúdo único dessa página.Use <main> apenas uma vez por página, 
+        e o coloca diretamente dentro do <body>. Não é ideal aninhar ele dentro de 
+        qualquer outro elemento senão o elemento <body>.
+     -->
+    <main>
+        <!--
+            Inclui um bloco de conteúdo relacionado o qual faz sentido por si só, sem o restante da 
+            página.
+        -->
+        <article>
+            <h2>Título do artigo</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum omnis vero tempore facere atque maiores laborum, consequuntur aliquam placeat. Reprehenderit inventore reiciendis odit eius suscipit dolorum corrupti voluptatem repellendus velit!</p>
+        </article>
+
+        <!--
+            É similar com <article>, mas ele é mais para agrupar uma única parte de página que 
+            constitui em um único pedaço de funcionalidade (por exemplo, um minimapa, ou um 
+            conjunto de manchetes e resumo).
+        -->
+        <section>
+            <h2>Título da seção</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore obcaecati odio velit sed quos laboriosam quibusdam pariatur magni deleniti dignissimos, dicta repellat quasi, aliquam perspiciatis soluta nemo explicabo reiciendis qui.</p>
+        </section>
+
+        <!-- 
+            <div>
+            É um elemento não semântico no nível de bloco, que você deve usar apenas se não 
+            conseguir pensar em um elemento de bloco semântico melhor para usar.
+         -->
+        <div class="cards">
+            <div class="card">
+                <h2>Card1</h2>
+                <img src="" alt="Card1">
+            </div>
+            <div class="card">
+                <h2>Card1</h2>
+                <img src="" alt="Card1">
+            </div>
+            <div class="card">
+                <h2>Card1</h2>
+                <img src="" alt="Card1">
+            </div>
+        </div>        
+    </main>
+    <!--
+        <aside>
+        É para conteúdo que não está relacionados diretamente com os conteúdos principais,
+        mas que podem providenciar informações complementares a esses (entradas de glossários,
+        biografia do autor, links relacionados, etc.).                
+    -->        
+    <aside>
+        <h2>Links relacionados</h2>            
+        <ul>
+            <li><a href="#">Link relacionado 1</a></li>
+            <li><a href="#">Link relacionado 2</a></li>
+            <li><a href="#">Link relacionado 3</a></li>
+            <li><a href="#">Link relacionado 4</a></li>
+        </ul>            
+    </aside>
+
+    <!-- 
+        <footer>
+        Rodapé da página.
+    -->
+    <footer>
+        <p>©Copyright</p>
+    </footer>
+</body>
+</html>
