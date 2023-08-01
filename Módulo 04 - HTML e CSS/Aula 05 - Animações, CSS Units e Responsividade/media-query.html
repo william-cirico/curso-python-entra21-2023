@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Queries</title>
+    <style>
+        .escondido {
+            width: 600px;
+            height: 600px;
+            display: none;
+            background-color: red;
+        }
+
+        /* Extra small - Celulares */
+        body {
+            background-color: coral;
+        }
+
+        /* Small - Tablets */
+        @media screen and (min-width: 600px) {
+            body {
+                background-color: red;
+            }
+        }
+
+        /* Medium - Landscape tablets */
+        @media screen and (min-width: 768px) {
+            body {
+                background-color: green;
+            }
+
+            .escondido {
+                display: block;
+            }
+        }
+
+        /* Large - notebooks/desktops */
+        @media screen and (min-width: 1024px) {
+            body {
+                background-color: blue;
+            }
+            
+        }        
+
+        /* Extra large - notebooks/desktops */
+        @media screen and (min-width: 1200px) {
+            body {
+                background-color: yellow;
+            }        
+        }
+    </style>
+</head>
+<body>
+    <h1>Media Queries</h1>    
+    <div class="escondido"></div>
+</body>
+</html>

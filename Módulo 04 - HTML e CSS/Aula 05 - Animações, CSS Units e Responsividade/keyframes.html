@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animações</title>
+    <style>
+        * {
+            margin: 0;
+        }
+
+        div {
+            background-color: red;
+            width: 300px;
+            height: 300px;
+            animation-name: mudar-fundo;
+            animation-duration: 1s;
+            animation-iteration-count: 1;
+            animation-direction: alternate;
+            animation-fill-mode: forwards;
+        }
+
+        .andando {
+            animation-name: andar;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+            animation-timing-function: cubic-bezier(1, 0, 0, 1);
+            position: relative;
+        }
+
+        .sumiu {
+            animation-name: sumir;
+            animation-duration: 4s;
+        }
+
+        @keyframes mudar-fundo {
+            from {
+                background-color: red;
+            }
+
+            50% {
+                background-color: green;
+            }
+
+            to {
+                background-color: blue;
+            }
+        }
+
+        @keyframes andar {
+            from {
+                left: 0vw;
+            }
+
+            to {
+                left: calc(100vw - 300px);
+            }
+        }
+
+        @keyframes sumir {
+            from {
+                opacity: 100%;
+            }
+
+            to {
+                opacity: 0%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+        Calc: https://css-tricks.com/a-complete-guide-to-calc-in-css/ 
+        Animation: https://css-tricks.com/snippets/css/keyframe-animation-syntax/
+    -->
+    <div></div>
+    <div class="andando"></div>
+    <div class="sumiu"></div>
+</body>
+</html>

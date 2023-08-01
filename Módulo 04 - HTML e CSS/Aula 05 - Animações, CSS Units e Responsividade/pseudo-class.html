@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pseudo Classes</title>
+    <style>
+        a, input {
+            display: inline-block;
+            margin: 20px;
+            padding: 10px;
+            width: 20%;    
+            font-size: 20px;                    
+        }
+
+        a:link {
+            border: 1px solid black;
+            background-color: black;            
+            text-decoration: none;
+            color: white;            
+            text-align: center;
+        }
+
+        a:visited {
+            color: red;            
+        }
+
+        a:hover {
+            background-color: white;
+            color: black;
+        }
+
+        input:focus {
+            background-color: rgb(41, 40, 40);
+            color: white;              
+            outline-color: blue;   
+        }
+
+        div p:first-child {
+            color: green;
+        }
+
+        div p:last-child {
+            color: purple;
+        }
+
+        .teste p:nth-child(even) {
+            color: brown;
+        }
+
+        .teste p:nth-child(odd) {
+            color: aqua;
+        }
+
+        p:first-of-type {
+            background-color: burlywood;
+        }
+    </style>
+</head>
+<body>
+    <!-- Definir o estado de um elemento -->
+    <a href="#">Passe o mouse em cima</a>
+    <input type="text" placeholder="Clique em mim">
+
+    <p>lorem ipsum dolor...</p>
+
+    <div>
+        <p>lorem ipsum dolor...</p>
+        <p>lorem ipsum dolor...</p>        
+    </div>
+
+
+    <h2>nth-child:</h2>
+    <div class="teste">
+        <p>lorem ipsum dolor...</p>
+        <p>lorem ipsum dolor...</p>
+        <p>lorem ipsum dolor...</p>
+        <p>lorem ipsum dolor...</p>
+    </div>
+
+    
+</body>
+</html>

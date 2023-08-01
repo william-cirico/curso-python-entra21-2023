@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Grid</title>
+    <style>
+        .grid-container div, .grid-container2 div, .grid-container4 div {            
+            border: 1px solid black;        
+        }
+
+        .grid-container {            
+            display: grid;
+            border: 2px solid #f76707;
+            /* Valores fixos */
+            grid-template-columns: 200px 200px 200px;
+
+            /* Valor fracionário -> fr */
+            /* grid-template-columns: 1fr 1fr 1fr; */
+            /* grid-template-columns: 500px 1fr 2fr; */
+
+            /* Notação repeat */
+            /* grid-template-columns: repeat(3, 1fr); */
+            /* grid-template-columns: 20px repeat(6, 1fr) 20px; */
+            /* grid-template-columns: repeat(5, 1fr 2fr); */
+
+            /* Grid Ímplicito (Tamanho que as linhas terão) */
+            /* grid-auto-rows: 200px; */
+
+            /* minmax() -> Definir um valor mínimo e máximo */
+            grid-auto-rows: minmax(100px, auto);
+
+            /* Gap -> Espaço entre linhas e colunas*/
+            /* row-gap: 10px;
+            column-gap: 10px; */
+            /* gap: 10px 10px; */
+        }        
+
+        .grid-container2 {
+            border: 2px solid green;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-auto-rows: 100px;
+        }
+
+        .box1 {
+            grid-column-start: 1;
+            grid-column-end: 4;
+            /* grid-column: 1 / 4; */
+            grid-row-start: 1;
+            grid-row-end: 3;
+            /* grid-row: 1 / 3; */
+
+            /* grid-area: 1 / 1 / 3 / 4; */
+        }
+
+        .box2 {            
+            grid-row-start: 3;
+            grid-row-end: 5;
+        }
+
+
+        .grid-container3 {
+            background-color: #f5b285;
+            border: 2px solid #f76707;
+            color: red;
+            display: grid;
+            grid-auto-rows: 100px;
+        }
+
+        .box {
+            background-color: #faa46a;
+            border: 1px solid rgb(148, 96, 0);
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        .box-1 {
+            grid-column-start: 1;
+            grid-column-end: 4;
+            grid-row-start: 1;
+            grid-row-end: 3;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .nested {
+            background-color: #FFFAD9;
+            border: 1px solid yellow;
+            border-radius: 4px;
+        }
+
+        .grid-container4 {  
+            border: 1px solid red;          
+            display: grid;
+            grid-auto-rows: 100px;
+            grid-template-areas: 
+                "a a b"
+                "a a b";
+        }
+
+        .item1 {
+            grid-area: a;
+        }
+
+        .item2 {
+            grid-area: b;
+        }
+
+        .grid-responsivo {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+        }
+
+        .box-responsiva {
+            background-color: #aaa;
+            border-radius: 10px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Display Grid</h2>
+    <div class="grid-container">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
+        <!-- minmax() -->
+        <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste accusamus nulla consequatur, quo libero, atque recusandae laborum illum maxime quos ipsum dolorum dolorem! Exercitationem provident ratione consequatur at, temporibus praesentium.</p> -->
+    </div>
+
+    <h2>Modificando grid-items:</h2>
+    <div class="grid-container2">
+        <div class="box1">1</div>
+        <div class="box2">2</div>
+        <div class="box3">3</div>
+        <div class="box4">4</div>
+        <div class="box5">5</div>
+    </div>
+
+    <h2>Aninhando grids</h2>
+    <div class="grid-container3">
+        <div class="box box-1">
+            <div class="nested">a</div>
+            <div class="nested">b</div>
+            <div class="nested">c</div>
+        </div>
+        <div class="box box2">2</div>
+        <div class="box box3">3</div>
+        <div class="box box4">4</div>
+        <div class="box box5">5</div>
+    </div>
+
+    <h2>Utilizando grid areas</h2>
+    <div class="grid-container4">
+        <div class="item1">1</div>
+        <div class="item2">2</div>
+    </div>
+
+    <h2>Grid responsivo</h2>
+    <div class="grid-responsivo">
+        <div class="box-responsiva">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, dignissimos?</div>
+        <div class="box-responsiva">Inventore ipsam modi labore corporis commodi magni reprehenderit sint. Recusandae.</div>
+        <div class="box-responsiva">Tempore maiores error distinctio. Ut vel velit laudantium minus error.</div>
+        <div class="box-responsiva">Autem eum numquam voluptates! Ullam accusantium ducimus aperiam officia nihil.</div>
+        <div class="box-responsiva">Hic ducimus at in culpa voluptatem iste architecto corrupti voluptas.</div>
+        <div class="box-responsiva">Ex doloremque nostrum voluptate distinctio rem velit commodi aspernatur et?</div>
+        <div class="box-responsiva">Explicabo, officia. Quis sit reiciendis repellendus optio iste sequi ipsum?</div>
+        <div class="box-responsiva">Iste debitis facilis nulla deserunt laboriosam quibusdam? Dicta, similique asperiores?</div>
+    </div>
+</body>
+</html>

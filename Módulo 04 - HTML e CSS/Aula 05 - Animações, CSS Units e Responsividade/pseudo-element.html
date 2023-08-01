@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pseudo Elemento</title>
+    <style>
+        p::first-letter {
+            color: red;
+        }
+
+        p::first-line {
+            font-size: 20px;
+        }
+
+        h1::before {
+            content: "";
+            display: block;                                    
+            height: 2px;
+            width: 100px;
+            background-color: blue;
+        }
+
+        h1::after {
+            content: "";
+            display: block;
+            height: 2px;
+            width: 100px;
+            margin-top: 10px;
+            background-color: red;            
+        }
+    </style>
+</head>
+<body>
+    <!-- Estilizar partes específicas de um elemento. -->
+    <p>
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. <br>
+        Impedit fugit accusantium hic, quidem incidunt dolores, numquam et.
+    </p>
+
+
+    <h1>
+        Título qualquer
+    </h1>
+</body>
+</html>

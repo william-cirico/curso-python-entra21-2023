@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transition</title>
+    <style>
+        a {
+            display: inline-block;
+            padding: 10px;
+            background-color: green;        
+            transition-property: background-color;
+            transition-duration: 4s;        
+            margin-bottom: 100px;        
+        }
+
+        a:hover {
+            background-color: black;
+        }
+
+        div {
+            width: 100px;
+            height: 200px;            
+            border: 1px solid black;
+            transition-property: transform;
+            transition-duration: 2s;
+        }
+
+        div:hover {
+            transform: scale(110%, 110%);
+        }
+    </style>
+</head>
+<body>
+    <a href="#">Passe o mouse em cima</a>
+    <div></div>
+</body>
+</html>

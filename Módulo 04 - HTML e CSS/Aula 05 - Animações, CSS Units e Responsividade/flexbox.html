@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flexbox CSS</title>
+    <style>
+        .flex-container {            
+            margin: 20px 0;
+            height: 300px;            
+            display: flex;                                    
+        }
+
+        .flex-container div {            
+            width: 300px;
+            font-size: 30px;   
+            padding: 10px;                     
+            border: 3px solid black;                                    
+        }
+
+        .flex-container:nth-of-type(1) {            
+            background-color: red;
+            /* row | column | row-reverse | column-reverse */
+            flex-direction: row;
+            flex-wrap: nowrap;                     
+           
+            /* A propriedade flex-flow é uma junção de flex-direction e flex-wrap
+            flex-flow: row wrap; */
+
+            /*justify-content: flex-start | flex-end | center | space-between | space-evenly | */
+            justify-content: space-between; 
+
+            /* align-items: stretch | flex-start | flex-end | center | baseline */
+            align-items: baseline;           
+
+            /* Espaço entre linhas */
+            align-content: space-around;
+        }
+
+        .flex-container2 {
+            background-color: blue;
+            flex-flow: column;
+        }        
+
+        .flex-container div:nth-child(1) {            
+            flex-basis: 200px;            
+            flex-grow: 1;
+            flex-shrink: 1;
+        }
+    </style>
+</head>
+<body>
+    <h1>Flexbox</h1>
+
+    <div class="flex-container">                
+        <div>Flex Item 1</div>
+        <div>Flex Item 2</div>
+        <div>Flex Item 3</div>        
+        <div>Flex Item 4</div>
+        <div>Flex Item 5</div>
+        <div>Flex Item 6</div>
+        <div>Flex Item 7</div>
+        <div>Flex Item 8</div>
+        <div>Flex Item 9</div>
+        <div>Flex Item 10</div>
+        <div>Flex Item 11</div>
+        <div>Flex Item 12</div>
+    </div>
+
+    <div class="flex-container2">                
+        <div>Flex Item 1</div>
+        <div>Flex Item 2</div>
+        <div>Flex Item 3</div>        
+        <div>Flex Item 4</div>
+        <div>Flex Item 5</div>
+    </div>
+</body>
+</html>
