@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Position</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;            
+        }
+
+        div {
+            height: 200px;
+            width: 200px;
+            border: 1px solid black;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .static {
+            background-color: aqua;
+            position: static;
+        }
+
+        .relative {
+            background-color: red;
+            position: relative;
+            top: 20px;
+            left: 30px;            
+        }
+
+        .absolute1 {
+            background-color: green;
+            position: absolute;
+            top: 200px;
+            left: 500px;            
+        }
+
+        .containerAbsolute {
+            width: 500px;
+            height: 500px;
+            position: relative;
+        }
+
+        .absolute2 {
+            background-color: yellow;
+            position: absolute;
+            top: 0px;
+            left: 40px;            
+        }
+
+        .fixed {
+            background-color: blue;
+            position: fixed;
+            top: 200px;
+            left: 800px;
+            z-index: 1;
+        }
+
+        .sticky {
+            background-color: orange;
+            position: sticky;
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Propriedade Position</h1>
+    <div class="sticky">STICKY</div>
+    <div class="static">STATIC</div>
+    <div class="relative">RELATIVE</div>
+    <div class="absolute1">ABSOLUTE</div>
+    <div class="containerAbsolute">
+        <div class="absolute2">ABSOLUTE DENTRO DE UMA DIV</div>
+    </div>
+    <div class="fixed">FIXED</div>    
+</body>
+</html>

@@ -1,0 +1,12 @@
+* {
+    margin-bottom: 5px;
+}
+
+#seletor-id {
+    background-color: green;
+}
+
+.seletor-classe {
+    background-color: blue;
+    color: white;
+}
