@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulários HTML</title>
 </head>
+
 <body>
     <h1>Formulários</h1>
 
@@ -28,38 +30,38 @@
             de diferentes tipos para obter essas informações.
         -->
         <label for="email">E-mail</label><br>
-        <input type="text" name="email" id="email" placeholder="digite o seu email"><br>        
-        
+        <input type="text" name="email" id="email" placeholder="digite o seu email"><br>
+
         <label for="senha">Senha</label><br>
         <input type="password" name="senha" id="senha" placeholder="digite sua senha"><br><br>
-        
+
         <input type="submit" value="Login">
-        
+
         <input type="reset" value="Limpar">
-        <br><br><br>        
+        <br><br><br>
     </form>
 
     <form action="backend/cadastro.js" method="POST">
         <label for="email2">E-mail</label><br>
         <input type="email" name="email" id="email2" required><br>
-        
-        <label for="dataNascimento">Data de nascimento:</label><br>        
-        <input type="date" name="dataNascimento" id="dataNascimento" min="1930-01-01" max="2020-06-02"><br>        
-        
+
+        <label for="dataNascimento">Data de nascimento:</label><br>
+        <input type="date" name="dataNascimento" id="dataNascimento" min="1930-01-01" max="2020-06-02"><br>
+
         <label for="tempo">Hora de nascimento:</label><br>
         <input type="time" name="tempo" id="tempo"><br>
-        
+
         <label for="foto">Foto:</label><br>
         <input type="file" name="foto" id="foto"><br>
 
         <p>Escolha seu sexo:</p>
         <input type="radio" name="sexo" id="masculino" value="masculino">
         <label for="masculino">Masculino</label><br>
-        
-        <input type="radio" name="sexo" id="feminino" value="feminino">   
+
+        <input type="radio" name="sexo" id="feminino" value="feminino">
         <label for="feminino">Feminino</label>
         <br>
-        
+
         <p>Selecione as linguagens que você conhece:</p>
         <input type="checkbox" name="csharp" id="csharp">
         <label for="csharp">C#</label><br>
@@ -112,11 +114,22 @@
             </select>
         </fieldset>
         <br><br>
+        <p>Qual seu favor de sorvete favorito?</p>
+        <input list="sorvetes">
+        <datalist id="sorvetes">
+            <option value="Chocolate"></option>
+            <option value="Coco"></option>
+            <option value="Baunilha"></option>
+            <option value="Menta"></option>
+            <option value="Morango"></option>
+        </datalist>
+        <br><br>
         <label for="mensagem">Informações adicionais:</label><br>
-        <textarea name="mensagem" id="mensagem" cols="30" rows="10" placeholder="Mensagem" ></textarea><br><br> 
+        <textarea name="mensagem" id="mensagem" cols="30" rows="10" placeholder="Mensagem"></textarea><br><br>
 
         <input type="button" value="Teste">
         <input type="submit" value="Cadastrar">
     </form>
 </body>
+
 </html>
