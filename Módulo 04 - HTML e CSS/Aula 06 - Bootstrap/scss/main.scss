@@ -1,0 +1,25 @@
+body {
+    background-repeat: repeat;
+    background-image: url("../img/paper-texture.png");
+}
+  
+.highlights-label {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+  
+.podcast-thumbnail {
+    width: 70px;
+    height: 70px;
+}
+  
+footer {
+    height: 50px;
+}
+
+$primary: #AF1324;
+$body-bg: rgb(245, 245, 245);
+$card-bg: #fff;
+
+@import "bootstrap/bootstrap.scss";
