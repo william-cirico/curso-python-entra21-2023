@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,31 +9,67 @@
         a {
             display: inline-block;
             padding: 10px;
-            background-color: green;        
+            background-color: rgb(126, 126, 126);
             transition-property: background-color;
-            transition-duration: 4s;        
-            margin-bottom: 100px;        
+            transition-duration: 4s;
+            margin-bottom: 100px;
         }
 
         a:hover {
             background-color: black;
         }
 
-        div {
-            width: 100px;
-            height: 200px;            
-            border: 1px solid black;
-            transition-property: transform;
-            transition-duration: 2s;
+        .container {
+            position: relative;
+            width: 200px;
         }
 
-        div:hover {
-            transform: scale(110%, 110%);
+        .image {
+            opacity: 1;
+            display: block;
+            width: 100%;
+            height: auto;
+            transition: .5s ease;
+            backface-visibility: hidden;
+        }
+
+        .middle {
+            transition: .5s ease;
+            opacity: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .container:hover .image {
+            opacity: 0.3;
+        }
+
+        .container:hover .middle {
+            opacity: 1;
+        }
+
+        .text {
+            background-color: #04AA6D;
+            color: white;
+            font-size: 16px;
+            padding: 16px 32px;
         }
     </style>
 </head>
+
 <body>
     <a href="#">Passe o mouse em cima</a>
-    <div></div>
+
+    <div class="container">
+        <img src="img/img_avatar.png" alt="Avatar" class="image">
+        <div class="middle">
+            <div class="text">John Doe</div>
+        </div>
+    </div>
 </body>
+
 </html>

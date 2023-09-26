@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,20 +13,63 @@
             position: relative;
         }
 
-        .center {            
+        .center {
             height: 100px;
             width: 100px;
             position: absolute;
-            bottom: 0; 
-            transform: translate(50%);                       
+            bottom: 0;
+            transform: translate(50%);
         }
-        
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            row-gap: 20px;
+        }
+
+        .btn {
+            position: relative;
+            background: #004958;
+            border-radius: 15px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .text {
+            display: block;
+            padding: 15px 45px;
+            border-radius: 15px;
+            background: #00c2cb;
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #42455a;
+            transform: translateY(-6px);
+            transition: transform ease 0.1s;
+        }
+
+        .btn:active .text {
+            transform: translateY(-2px);
+        }
     </style>
 </head>
+
 <body>
-    <div class="div1">
+    <div>
         <div class="center"></div>
     </div>
-    <div class="div2">div2</div>
+
+    <!-- Micro-interactions -->
+    <button class="btn"><span class="text">Click Me</span></button>
 </body>
+
 </html>
