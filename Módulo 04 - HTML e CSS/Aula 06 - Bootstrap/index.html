@@ -12,13 +12,16 @@
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="css/main.css">
+    <style>
+
+    </style>
 </head>
 
 <body>
     <div class="container">
         <header class="d-flex justify-content-between my-3 align-items-center">
-            <h1><img src="img/logo.PNG" class="d-block" alt="logo do site" height="70"></h1>
-            <div class="d-flex justify-content-between column-gap-3">
+            <h1><img src="img/logo.svg" class="d-block" alt="logo do site" height="70"></h1>
+            <div class="justify-content-between column-gap-3 d-none d-md-flex">
                 <div class="input-group align-self-center">
                     <input type="text" class="form-control bg-light" placeholder="Pesquisar">
                     <i class="bi bi-search input-group-text"></i>
@@ -29,7 +32,7 @@
                 </button>
             </div>
         </header>
-        <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
+        <aside class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
             id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
             <div class="offcanvas-header">
                 <h3 class="offcanvas-title" id="offcanvasScrollingLabel">Login</h3>
@@ -61,13 +64,15 @@
                 <div class="d-grid">
                     <button type="button" class="btn btn-outline-primary bt-lg mb-3"><i class="bi bi-google"></i> Entrar
                         com o Google</button>
-                    <button type="button" class="btn btn-outline-primary bt-lg"><i class="bi bi-facebook"></i> Entrar com
+                    <button type="button" class="btn btn-outline-primary bt-lg"><i class="bi bi-facebook"></i> Entrar
+                        com
                         o Facebook</button>
-                    <a href="#" class="link-primary link-underline link-underline-opacity-0 text-center mt-3">Não tem uma
+                    <a href="#" class="link-primary link-underline link-underline-opacity-0 text-center mt-3">Não tem
+                        uma
                         conta? <strong>Cadastre-se</strong></a>
                 </div>
             </div>
-        </div>
+        </aside>
         <nav class="navbar navbar-dark navbar-expand-lg sticky-top bg-primary rounded">
             <div class="container-fluid">
                 <a class="navbar-brand nav-link" href="#">Categorias</a>
@@ -85,6 +90,8 @@
                         <a href="#" class="nav-link">IA e Machine Learning</a>
                         <a href="#" class="nav-link">Redes</a>
                         <a href="#" class="nav-link">Hardware</a>
+                        <a href="#" class="nav-link d-sm-none">Mais Lidas</a>
+                        <a href="#" class="nav-link d-sm-none">Podcasts</a>
                     </div>
                 </div>
             </div>
@@ -107,7 +114,7 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col-sm-7">
+                    <div class="col-md-7 mb-3">
                         <div class="card text-bg-dark h-100">
                             <img src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
                                 class="card-img" alt="...">
@@ -120,7 +127,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-5 d-flex flex-column">
+                    <div class="col-md-5 d-flex flex-column">
                         <div class="card text-bg-dark h-100 mb-3">
                             <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
                                 class="card-img" alt="...">
@@ -268,7 +275,7 @@
                             </button>
                         </div>
                     </div>
-                    <aside class="col-sm-4">
+                    <aside class="col-md-4 d-none d-md-block">
                         <ul class="list-group mb-3">
                             <li class="list-group-item text-light bg-primary" aria-current="true">
                                 <h3>Mais lidas</h3>
