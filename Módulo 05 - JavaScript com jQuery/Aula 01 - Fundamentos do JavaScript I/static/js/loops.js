@@ -13,7 +13,7 @@ for (let i = 0; i < 3; i++) {
 // BREAK
 let sum = 0;
 while (true) {
-    let value = +prompt("Digite um número");
+    const value = +prompt("Digite um número");
     
     if (!value) break;
 

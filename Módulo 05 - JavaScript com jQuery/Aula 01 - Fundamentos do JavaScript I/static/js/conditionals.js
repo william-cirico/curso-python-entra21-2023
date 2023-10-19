@@ -58,7 +58,9 @@ switch (currentMonth) {
     case 4:
         console.log("Maio");
         break;
-    case 5: console.log("Junho");
+    case 5: 
+        console.log("Junho");
+        break;
     case 6:
     case 7:
     case 8:

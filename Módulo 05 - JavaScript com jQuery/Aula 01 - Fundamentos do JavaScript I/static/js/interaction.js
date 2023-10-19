@@ -2,10 +2,10 @@
 
 alert("Hello world!");
 
-let birthYear = prompt("Em que ano você nasceu?");
-let currentYear = prompt("Qual é o ano atual?", new Date().getFullYear());
+const birthYear = prompt("Em que ano você nasceu?");
+const currentYear = prompt("Qual é o ano atual?", new Date().getFullYear());
 
-let age = currentYear - birthYear;
+const age = currentYear - birthYear;
 console.log(age);
 
 const isAdult = confirm("Você é maior de idade?");
