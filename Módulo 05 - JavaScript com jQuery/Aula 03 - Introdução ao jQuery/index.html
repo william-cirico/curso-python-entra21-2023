@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introdução ao jQuery</title>
+    <script src="static/js/jquery.min.js"></script>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .youtube {
+            background-color: red;
+            color: white;
+            display: inline-block;
+            font-size: 300px;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .google {
+            background-image: linear-gradient(to right, #4285F4, #0F9D58, #F4B400, #DB4437);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            font-size: 300px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .square {
+            background-color: red;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Introdução ao jQuery</h1>
+
+    <p>Esse é um parágrafo que foi modificado utilizando jQuery</p>
+    <button>Esconder parágrafo</button>
+
+    <a href="https://google.com.br" class="google" target="_blank">Google</a>
+
+    <ul id="lista"></ul>
+
+    <div class="square"></div>
+    <script>
+        // Esperar que o documento esteja pronto para rodar o código.
+        $(document).ready(function () {
+            // Modificando o css dinamicamente
+            $("p").css("color", "red");
+
+            $("button").click(function () {
+                // Adicionado um efeito para o elemento
+                $("p").hide("slow");
+            });
+
+            // Variável que controla o estado do link
+            let currentLink = "google";
+
+            $("a").click(function (event) {
+                if (currentLink === "google") {
+                    currentLink = "youtube";
+
+                    // Modificando o href
+                    $(this).attr("href", "https://google.com.br");
+                    
+                    // Substituindo a class
+                    $(this).attr("class", "youtube");
+
+                    // Modificando o texto
+                    $(this).text("Youtube");
+
+                } else {
+                    currentLink = "google";
+
+                    $(this).attr("href", "https://youtube.com.br");
+
+                    $(this).attr("class", "google");
+                    $(this).text("Google");
+                }
+
+                event.preventDefault();
+            });
+
+            // Selecionando elemento pelo id
+            const list = $("#lista");
+
+            // Criando elementos
+            for (let i = 0; i < 5; i++) {
+                const li = $(`<li>Item ${i + 1}</li>`);
+                list.append(li);
+            }
+
+            // Largura e altura de um elemento
+            const square = $(".square");
+            square.height("100px");
+            square.width("100px");
+
+            // Coordenadas de um elemento
+            console.log(square.position());
+        });
+    </script>
+</body>
+
+</html>
