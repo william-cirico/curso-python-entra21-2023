@@ -65,8 +65,9 @@ $(document).ready(() => {
             dateTimer = setInterval(updateDate, 60000);
         }
 
-        // Atualizar o texto do botão com base no estado (pausado ou retomado)
+        // Atualizar o texto e o estilo do botão com base no estado (pausado ou retomado)
         $toggleButton.text(isPaused ? "Resumir" : "Pausar");
+        $toggleButton.css("background-color", isPaused ? "#ADE25D" : "rgb(6, 164, 236)");
     };
 
     // Vincular a função de alternância ao clique do botão
