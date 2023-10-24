@@ -4,109 +4,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Introdução ao jQuery</title>
+    <title>Relógio com jQuery</title>
     <script src="static/js/jquery.min.js"></script>
     <style>
+        @font-face {
+            font-family: 'Digital-7';
+            src: url('static/fonts/digital-7.ttf');
+        }
+
         body {
             display: flex;
+            height: 100vh;
+            margin: 0;
+            background-color: #272E38;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .clock-container {
+            background-color: #0F1620;
+            padding: 1.25rem;
+            text-align: center;
+            border-radius: 16px;
+            width: 300px;
+            max-width: 95%;
+            display: flex;
             flex-direction: column;
-            gap: 30px;
+            gap: 16px;
         }
 
-        .youtube {
-            background-color: red;
-            color: white;
-            display: inline-block;
-            font-size: 300px;
-            text-decoration: none;
-            text-align: center;
+        .clock {
+            color: #fff;
+            font-size: 6.25rem;
+            font-family: 'Digital-7', Courier, monospace;
         }
 
-        .google {
-            background-image: linear-gradient(to right, #4285F4, #0F9D58, #F4B400, #DB4437);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            color: transparent;
-            font-size: 300px;
+        .date {
+            color: #f1f1f1;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .title {
+            font-size: 2.125rem;
+            text-transform: uppercase;
+            font-weight: 900;
+            color: #fff;
+            margin: 0;
+        }
+
+        #toggleButton {
+            background-color: rgb(6, 164, 236);
+            color: #fff;
+            border: none;
+            padding: 16px;
+            border-radius: 8px;
+            display: block;
+            width: 100%;
+            transition: opacity 0.3s;
+            cursor: pointer;
             font-weight: bold;
-            text-align: center;
+            text-transform: uppercase;
+            font-size: 1rem;
         }
 
-        .square {
-            background-color: red;
-            border: 1px solid black;
+        #toggleButton:hover {
+            opacity: 0.8;
         }
     </style>
 </head>
 
 <body>
-    <h1>Introdução ao jQuery</h1>
-
-    <p>Esse é um parágrafo que foi modificado utilizando jQuery</p>
-    <button>Esconder parágrafo</button>
-
-    <a href="https://google.com.br" class="google" target="_blank">Google</a>
-
-    <ul id="lista"></ul>
-
-    <div class="square"></div>
-    <script>
-        // Esperar que o documento esteja pronto para rodar o código.
-        $(document).ready(function () {
-            // Modificando o css dinamicamente
-            $("p").css("color", "red");
-
-            $("button").click(function () {
-                // Adicionado um efeito para o elemento
-                $("p").hide("slow");
-            });
-
-            // Variável que controla o estado do link
-            let currentLink = "google";
-
-            $("a").click(function (event) {
-                if (currentLink === "google") {
-                    currentLink = "youtube";
-
-                    // Modificando o href
-                    $(this).attr("href", "https://google.com.br");
-                    
-                    // Substituindo a class
-                    $(this).attr("class", "youtube");
-
-                    // Modificando o texto
-                    $(this).text("Youtube");
-
-                } else {
-                    currentLink = "google";
-
-                    $(this).attr("href", "https://youtube.com.br");
-
-                    $(this).attr("class", "google");
-                    $(this).text("Google");
-                }
-
-                event.preventDefault();
-            });
-
-            // Selecionando elemento pelo id
-            const list = $("#lista");
-
-            // Criando elementos
-            for (let i = 0; i < 5; i++) {
-                const li = $(`<li>Item ${i + 1}</li>`);
-                list.append(li);
-            }
-
-            // Largura e altura de um elemento
-            const square = $(".square");
-            square.height("100px");
-            square.width("100px");
-
-            // Coordenadas de um elemento
-            console.log(square.position());
-        });
-    </script>
+    <div class="clock-container">
+        <h1 class="title">Digital Clock</h1>
+        <div class="clock"></div>
+        <div class="date"></div>
+        <button id="toggleButton">Pausar</button>
+    </div>
+    <script src="static/js/main.js"></script>
 </body>
 
 </html>
