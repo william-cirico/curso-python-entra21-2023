@@ -49,7 +49,7 @@ $(document).ready(() => {
     $form.submit(event => {
         event.preventDefault();
 
-        // Verifica se o formulário é inválido
+        // Verifica se o formulário é válido
         if ($form[0].checkValidity()) {
             addTaskToBoard($descriptionInput.val(), $boardSelect.val());
             $form[0].reset(); // Reseta o formulário
