@@ -14,18 +14,7 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
-
-    <style>
-        input[type="checkbox"]:checked + label {
-            text-decoration: line-through;
-        }
-
-        .checkbox-xl .form-check-input {
-            top: 1.2rem;
-            scale: 1.7;
-            margin-right: 0.8rem;
-        }
-    </style>
+    <link rel="stylesheet" href="static/css/styles.css">
 </head>
 
 <body>
@@ -55,7 +44,7 @@
             </form>
             <hr>
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Pesquisar...">
+                <input type="text" class="form-control" placeholder="Pesquisar..." id="searchInput">
                 <i class="bi bi-search input-group-text"></i>
             </div>
             <button id="toggleCompletedButton" class="btn btn-light align-self-md-end mb-3" data-showing-completed="true"><i class="bi bi-eye-slash"></i> Esconder tarefas
@@ -63,6 +52,9 @@
             <ul class="list-group">
                 <li class="list-group-item active">
                     <h2 class="fs-5 mb-0">Tarefas</h2>
+                </li>
+                <li class="list-group-item text-center" id="emptyMessage">
+                    Não há tarefas cadastradas.
                 </li>
             </ul>
         </div>
