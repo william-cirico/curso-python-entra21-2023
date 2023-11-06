@@ -6,14 +6,44 @@ $(document).ready(() => {
     const $successToast = $("#successToast");
     const $taskList = $(".list-group");
     const $toggleCompletedButton = $("#toggleCompletedButton");
+    const $emptyMessage = $("#emptyMessage");
+    const $searchInput = $("#searchInput");
 
     // Instância do componente Toast do bootstrap
     const successToast = bootstrap.Toast.getOrCreateInstance($successToast);
 
+    /** Filtra as tarefas de acordo com texto digitado no input de pesquisa */
+    const filterTasks = () => {
+        const searhTerm = $searchInput.val().toLowerCase();
+
+        const $tasks = $(".list-group-item:not(.active):not(#emptyMessage)");
+        $.each($tasks, (_, task) => {
+            const $task = $(task);
+            const description = $task.find("p").text().toLowerCase();
+
+            if (!description.includes(searhTerm)) {
+                $task.removeClass("d-flex").hide();
+            } else {
+                $task.addClass("d-flex").show();
+            }
+        });
+
+        checkEmptyList();
+    };
+
+    /** Função responsável por realizar o toggle da mensagem de lista vazia */
+    const checkEmptyList = () => {
+        if ($(".list-group-item:not(.active):not(#emptyMessage)").length === 0) {
+            $emptyMessage.show();
+        } else {
+            $emptyMessage.hide();
+        }
+    };
+
     /** Salva as tarefas no localStorage */
     const saveTasksToLocalStorage = () => {
         const tasks = [];
-        const $tasks = $(".list-group-item:not(.active)");
+        const $tasks = $(".list-group-item:not(.active):not(#emptyMessage)");
 
         $.each($tasks, (_, task) => {
             const $task = $(task);
@@ -77,24 +107,29 @@ $(document).ready(() => {
     };
 
     /**
-     * Encerra a edição de uma tarefa e atualiza o localStorage
-     * @param {jQuery} $task - O elemento jQuery da tarefa que está sendo editada.
+     * Evento de remoção de uma tarefa
+     * @param {jQuery} $task - O elemento jQuery da tarefa que será removida 
+     */
+    const onRemoveTask = ($task) => {
+        $task.remove();
+        checkEmptyList();
+    };
+
+    /**
+     * Encerra a edição de uma tarefa
+     * @param {jQuery} $task - O elemento jQuery da tarefa que está sendo editada
      */
     const endEditTask = ($task) => {
         const $descriptionInput = $task.find("input.form-control[type='text']");
         const $expirationDateInput = $task.find("input.form-control[type='date']");
+        const $completedCheckbox = $task.find("input[type='checkbox']");
 
-        const $description = $("<p class='fs-6 mb-0'></p>").text($descriptionInput.val());
-        const $expirationDate = $("<span class='text-secondary'></span>").text(`Expira em: ${dayjs($expirationDateInput.val()).format("DD/MM/YYYY")}`);
+        const description = $descriptionInput.val();
+        const expirationDate = dayjs($expirationDateInput.val()).format("DD/MM/YYYY");
+        const completed = $completedCheckbox.prop("checked");
 
-        $descriptionInput.replaceWith($description);
-        $expirationDateInput.replaceWith($expirationDate);
-
-        const $editButton = createIconButton("bi bi-pencil", "btn btn-warning btn-sm", () => startEditTask($task));
-        const $removeButton = createIconButton("bi bi-x-lg", "btn btn-danger btn-sm", () => $task.remove());
-
-        const $buttonDiv = $task.find("div:nth-of-type(2)");
-        $buttonDiv.empty().append($editButton, $removeButton);
+        const $updatedTask = createTask(description, expirationDate, completed);
+        $task.replaceWith($updatedTask);
     };
 
     /**
@@ -142,9 +177,10 @@ $(document).ready(() => {
      * Cria a representação DOM de uma tarefa e retorna o elemento jQuery
      * @param {string} description - Descrição da tarefa
      * @param {string} expirationDate - Data de expiração da tarefa
+     * @param {boolean} completed - Estado da tarefa
      * @returns {jQuery} O elemento jQuery da nova tarefa
      */
-    const createTask = (description, expirationDate) => {
+    const createTask = (description, expirationDate, completed = false) => {
         const $li = $('<li class="list-group-item d-flex justify-content-between align-items-center"></li>');
 
         // Criando os elementos do checkbox
@@ -155,7 +191,8 @@ $(document).ready(() => {
         const $checkbox = $("<input>", {
             "class": "form-check-input",
             type: "checkbox",
-            id: checkboxId
+            id: checkboxId,
+            checked: completed
         });
 
         const $label = $("<label class='form-check-label'></label>").attr("for", checkboxId);
@@ -167,7 +204,7 @@ $(document).ready(() => {
         // Criando os botões de editar e excluir
         const $buttonDiv = $("<div class='d-flex column-gap-2'></div>");
         const $editButton = createIconButton("bi bi-pencil", "btn btn-warning btn-sm", () => startEditTask($li));
-        const $removeButton = createIconButton("bi bi-x-lg", "btn btn-danger btn-sm", () => $li.remove());
+        const $removeButton = createIconButton("bi bi-x-lg", "btn btn-danger btn-sm", () => onRemoveTask($li));
         $buttonDiv.append($editButton, $removeButton);
 
         // Adicionando o checkbox e o botão na div
@@ -198,9 +235,13 @@ $(document).ready(() => {
         // Mostrando o toast de sucesso
         successToast.show();
 
+        checkEmptyList();
+
         // Removendo a classe de expiração
         $taskForm.removeClass("was-validated");
         $taskForm[0].reset();
+
+        checkEmptyList();
     });
 
     // Alternância da exibição de tarefas concluídas
@@ -226,6 +267,10 @@ $(document).ready(() => {
         saveTasksToLocalStorage();
     });
 
+    // Evento de entrada de teclado para filtrar conforme o usuário digita
+    $searchInput.on("keyup", filterTasks);
+
     setMinExpirationDate();
     loadTasksFromLocalStorage();
+    checkEmptyList();
 });
