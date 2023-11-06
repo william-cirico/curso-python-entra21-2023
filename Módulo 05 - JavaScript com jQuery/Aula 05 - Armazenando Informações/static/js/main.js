@@ -27,8 +27,6 @@ $(document).ready(() => {
                 $task.addClass("d-flex").show();
             }
         });
-
-        checkEmptyList();
     };
 
     /** Função responsável por realizar o toggle da mensagem de lista vazia */
@@ -43,10 +41,12 @@ $(document).ready(() => {
     /** Salva as tarefas no localStorage */
     const saveTasksToLocalStorage = () => {
         const tasks = [];
+        // Obtendo todas as tarefas na tela (<li>)
         const $tasks = $(".list-group-item:not(.active):not(#emptyMessage)");
 
         $.each($tasks, (_, task) => {
             const $task = $(task);
+            // Obtendo os elementos da tarefa (descrição, data de expiração, status)
             const description = $task.find("p").text();
             const expirationDate = $task.find("span").text().replace("Expira em: ", "");
             const isCompleted = $task.find("input[type='checkbox']").is(":checked");
@@ -58,6 +58,7 @@ $(document).ready(() => {
             });
         });
 
+        // Adicionando as tarefas no localStorage
         localStorage.setItem("tasks", JSON.stringify(tasks));
     };
 
@@ -67,12 +68,7 @@ $(document).ready(() => {
 
         // Adicionando cada tarefa salva à lista de tarefas
         tasks.forEach(task => {
-            const $task = createTask(task.description, task.expirationDate);
-
-            if (task.isCompleted) {
-                $task.find("input[type='checkbox']").prop("checked", true);
-            }
-
+            const $task = createTask(task.description, task.expirationDate, task.completed);
             $taskList.append($task);
         });
     };
@@ -137,12 +133,14 @@ $(document).ready(() => {
      * @param {jQuery} $task - O elmento jQuery da tarefa que vai entrar em modo de edição
      */
     const startEditTask = ($task) => {
+        // Obtendo a descrição e a data de expiração da task
         const $description = $task.find("p");
         const $expirationDate = $task.find("span");
 
         const currentDescription = $description.text();
         const currentExpiration = dayjs($expirationDate.text().replace("Expira em: ", ""), "DD/MM/YYYY").format("YYYY-MM-DD");
 
+        // Criando os inputs para edição
         const $descriptionInput = $("<input>", {
             "class": "form-control mb-2",
             type: "text",
@@ -154,9 +152,11 @@ $(document).ready(() => {
             value: currentExpiration
         });
 
+        // Criando os botões de salvar e cancelar
         const $saveButton = $("<button class='btn btn-success btn-sm'>Salvar</button>");
         const $cancelButton = $("<button class='btn btn-secondary btn-sm'>Cancelar</button>");
 
+        // Adicionando o evento no botão de salvar
         $saveButton.on("click", () => {
             $description.text($descriptionInput.val());
             const formattedDate = dayjs($expirationDateInput.val()).format("DD/MM/YYYY");
@@ -164,11 +164,14 @@ $(document).ready(() => {
             endEditTask($task);
         });
 
+        // Adicionando o evento no botão de cancelar
         $cancelButton.on("click", () => endEditTask($task));
 
+        // Substituindo o <p> e o <span> da tarefa pelos inputs
         $description.replaceWith($descriptionInput);
         $expirationDate.replaceWith($expirationDateInput);
 
+        // Substituindo os botões
         const $buttonDiv = $task.find("div:nth-of-type(2)");
         $buttonDiv.empty().append($saveButton, $cancelButton);
     };
@@ -207,7 +210,7 @@ $(document).ready(() => {
         const $removeButton = createIconButton("bi bi-x-lg", "btn btn-danger btn-sm", () => onRemoveTask($li));
         $buttonDiv.append($editButton, $removeButton);
 
-        // Adicionando o checkbox e o botão na div
+        // Adicionando a div do checkbox e a div dos botões na tarefa
         $li.append($checkboxDiv, $buttonDiv);
 
         return $li;
@@ -235,17 +238,17 @@ $(document).ready(() => {
         // Mostrando o toast de sucesso
         successToast.show();
 
-        checkEmptyList();
-
         // Removendo a classe de expiração
         $taskForm.removeClass("was-validated");
+
+        // Resetando o formulário
         $taskForm[0].reset();
 
         checkEmptyList();
     });
 
     // Alternância da exibição de tarefas concluídas
-    $toggleCompletedButton.on("click", function () {
+    $toggleCompletedButton.on("click", () => {
         const isShowingCompleted = $(this).data("showing-completed");
 
         if (isShowingCompleted) {
