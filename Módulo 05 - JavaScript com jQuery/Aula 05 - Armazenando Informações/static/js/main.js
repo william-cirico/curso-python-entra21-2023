@@ -12,16 +12,17 @@ $(document).ready(() => {
     // Instância do componente Toast do bootstrap
     const successToast = bootstrap.Toast.getOrCreateInstance($successToast);
 
+    // 6º Passo:
     /** Filtra as tarefas de acordo com texto digitado no input de pesquisa */
     const filterTasks = () => {
-        const searhTerm = $searchInput.val().toLowerCase(); // Obtém o valor do input de pesquisa e converte ele para minúsculo
+        const searchTerm = $searchInput.val().toLowerCase(); // Obtém o valor do input de pesquisa e converte ele para minúsculo
 
         const $tasks = $(".list-group-item:not(.active):not(#emptyMessage)");
         $.each($tasks, (_, task) => {
             const $task = $(task); //Transforma o elemento do DOM para elemento do jQuery (habilita o .find())
             const description = $task.find("p").text().toLowerCase(); // Obtém o valor da descrição da tarefa
 
-            if (!description.includes(searhTerm)) {
+            if (!description.includes(searchTerm)) {
                 $task.removeClass("d-flex").hide(); // Remove a classe d-flex e esconde a tarefa
             } else {
                 $task.addClass("d-flex").show(); // Adiciona a classe d-flex e exibe a tarefa
@@ -39,6 +40,7 @@ $(document).ready(() => {
         }
     };
 
+    // 7º Passo
     /** Salva as tarefas no localStorage */
     const saveTasksToLocalStorage = () => {
         const tasks = [];
@@ -221,8 +223,8 @@ $(document).ready(() => {
 
         // Criando os botões de editar e excluir
         const $buttonDiv = $("<div class='d-flex column-gap-2'></div>");
-        const $editButton = createIconButton("bi bi-pencil", "btn btn-warning btn-sm", () => startEditTask($li));
-        const $removeButton = createIconButton("bi bi-x-lg", "btn btn-danger btn-sm", () => onRemoveTask($li));
+        const $editButton = createIconButton("bi bi-pencil", "btn btn-warning btn-sm", () => startEditTask($li)); // 4º Passo: criar a função de edição
+        const $removeButton = createIconButton("bi bi-x-lg", "btn btn-danger btn-sm", () => onRemoveTask($li)); // 3º Passo: criar a função de remoção
         $buttonDiv.append($editButton, $removeButton);
 
         // Adicionando a div do checkbox e a div dos botões na tarefa
@@ -231,6 +233,7 @@ $(document).ready(() => {
         return $li;
     };
 
+    // 1º Passo:
     // Configuração do evento de envio do formulário de tarefa
     $taskForm.on("submit", event => {
         event.preventDefault();
@@ -245,7 +248,7 @@ $(document).ready(() => {
         const expirationDate = dayjs($expirationDateInput.val()).format("DD/MM/YYYY");
 
         // Criando a tarefa
-        const $task = createTask(description, expirationDate);
+        const $task = createTask(description, expirationDate); // 2º Passo: criar a função.
 
         // Inserindo a tarefa na lista
         $taskList.append($task);
@@ -262,6 +265,7 @@ $(document).ready(() => {
         checkEmptyList();
     });
 
+    // 5º Passo:
     // Alternância da exibição de tarefas concluídas
     $toggleCompletedButton.on("click", () => {
         const isShowingCompleted = $(this).data("showing-completed");
@@ -280,6 +284,7 @@ $(document).ready(() => {
         $(this).data("showing-completed", !isShowingCompleted);
     });
 
+    // 8º Passo:
     // Salvando as tarefas antes de sair da página
     $(window).on("beforeunload", () => {
         saveTasksToLocalStorage();
@@ -289,6 +294,8 @@ $(document).ready(() => {
     $searchInput.on("keyup", filterTasks);
 
     setMinExpirationDate();
+
+    // 9º Passo
     loadTasksFromLocalStorage();
     checkEmptyList();
 });
