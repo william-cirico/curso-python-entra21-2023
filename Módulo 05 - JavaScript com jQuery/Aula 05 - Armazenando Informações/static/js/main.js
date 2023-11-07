@@ -14,27 +14,28 @@ $(document).ready(() => {
 
     /** Filtra as tarefas de acordo com texto digitado no input de pesquisa */
     const filterTasks = () => {
-        const searhTerm = $searchInput.val().toLowerCase();
+        const searhTerm = $searchInput.val().toLowerCase(); // Obtém o valor do input de pesquisa e converte ele para minúsculo
 
         const $tasks = $(".list-group-item:not(.active):not(#emptyMessage)");
         $.each($tasks, (_, task) => {
-            const $task = $(task);
-            const description = $task.find("p").text().toLowerCase();
+            const $task = $(task); //Transforma o elemento do DOM para elemento do jQuery (habilita o .find())
+            const description = $task.find("p").text().toLowerCase(); // Obtém o valor da descrição da tarefa
 
             if (!description.includes(searhTerm)) {
-                $task.removeClass("d-flex").hide();
+                $task.removeClass("d-flex").hide(); // Remove a classe d-flex e esconde a tarefa
             } else {
-                $task.addClass("d-flex").show();
+                $task.addClass("d-flex").show(); // Adiciona a classe d-flex e exibe a tarefa
             }
         });
     };
 
     /** Função responsável por realizar o toggle da mensagem de lista vazia */
     const checkEmptyList = () => {
+        // Verifique se a quantidade de tarefas é 0
         if ($(".list-group-item:not(.active):not(#emptyMessage)").length === 0) {
-            $emptyMessage.show();
+            $emptyMessage.show(); // Mostra a mensagem: "Não há tarefas cadastradas"
         } else {
-            $emptyMessage.hide();
+            $emptyMessage.hide(); // Esconde a mensagem
         }
     };
 
@@ -44,13 +45,15 @@ $(document).ready(() => {
         // Obtendo todas as tarefas na tela (<li>)
         const $tasks = $(".list-group-item:not(.active):not(#emptyMessage)");
 
+        // Percorrendo cada tarefa para gerar um objeto da tarefa ({ description, expirationDate, isCompleted })
         $.each($tasks, (_, task) => {
             const $task = $(task);
             // Obtendo os elementos da tarefa (descrição, data de expiração, status)
-            const description = $task.find("p").text();
-            const expirationDate = $task.find("span").text().replace("Expira em: ", "");
-            const isCompleted = $task.find("input[type='checkbox']").is(":checked");
+            const description = $task.find("p").text(); // Obtém o texto do parágrafo de descrição
+            const expirationDate = $task.find("span").text().replace("Expira em: ", ""); //Obtém o texto da <span> e substitui o texto Expira em por "".
+            const isCompleted = $task.find("input[type='checkbox']").is(":checked"); // Obtém o status da tarefa (true ou false)
 
+            // Adiciona a tarefa no vetor de tarefas
             tasks.push({
                 description,
                 expirationDate,
@@ -68,15 +71,15 @@ $(document).ready(() => {
 
         // Adicionando cada tarefa salva à lista de tarefas
         tasks.forEach(task => {
-            const $task = createTask(task.description, task.expirationDate, task.completed);
-            $taskList.append($task);
+            const $task = createTask(task.description, task.expirationDate, task.completed); // Criando a tarefa
+            $taskList.append($task); // Adicionando a tarefa na lista
         });
     };
 
     /** Define a data mínima de expiração para o input de data de expiração */
     const setMinExpirationDate = () => {
-        const today = dayjs().format("YYYY-MM-DD");
-        $expirationDateInput.attr("min", today);
+        const today = dayjs().format("YYYY-MM-DD"); // Obtém a data atual e formata ela para "ano-mes-dia" (O input type="date" só aceita datas nesse formato)
+        $expirationDateInput.attr("min", today); //Definindo o valor mínimo para a data
     };
 
     /**
@@ -94,12 +97,12 @@ $(document).ready(() => {
      * @returns {jQuery} O botão jQuery criado
      */
     const createIconButton = (iconClasses, btnClasses, clickHandler) => {
-        const $button = $("<button></button>").addClass(btnClasses);
-        const $icon = $("<i></i>").addClass(iconClasses);
-        $button.append($icon);
-        $button.on("click", clickHandler);
+        const $button = $("<button></button>").addClass(btnClasses); // Criando o elemento <button> e adicionando as classes
+        const $icon = $("<i></i>").addClass(iconClasses); // Criando o elemento do ícone e adicionando as classes
+        $button.append($icon); // Adicionando dentro do botão
+        $button.on("click", clickHandler); // Adicionando o eveto de click do button
 
-        return $button;
+        return $button; // Retornando o botão criado
     };
 
     /**
@@ -107,8 +110,8 @@ $(document).ready(() => {
      * @param {jQuery} $task - O elemento jQuery da tarefa que será removida 
      */
     const onRemoveTask = ($task) => {
-        $task.remove();
-        checkEmptyList();
+        $task.remove(); // Removendo a tarefa do DOM
+        checkEmptyList(); // Verificando se a lista está vazia para exibir a mensagem
     };
 
     /**
@@ -116,15 +119,20 @@ $(document).ready(() => {
      * @param {jQuery} $task - O elemento jQuery da tarefa que está sendo editada
      */
     const endEditTask = ($task) => {
+        // Obtendo os inputs da tarefa no DOM
         const $descriptionInput = $task.find("input.form-control[type='text']");
         const $expirationDateInput = $task.find("input.form-control[type='date']");
         const $completedCheckbox = $task.find("input[type='checkbox']");
 
+        // Obtendo os valores digitados nos inputs
         const description = $descriptionInput.val();
         const expirationDate = dayjs($expirationDateInput.val()).format("DD/MM/YYYY");
         const completed = $completedCheckbox.prop("checked");
 
+        // Criando uma nova tarefa com os valores atualizados
         const $updatedTask = createTask(description, expirationDate, completed);
+
+        // Substituindo a tarefa antiga pela tarefa atualiza
         $task.replaceWith($updatedTask);
     };
 
@@ -133,12 +141,13 @@ $(document).ready(() => {
      * @param {jQuery} $task - O elmento jQuery da tarefa que vai entrar em modo de edição
      */
     const startEditTask = ($task) => {
-        // Obtendo a descrição e a data de expiração da task
+        // Obtendo os elementos de descrição e data de expiração do DOM
         const $description = $task.find("p");
         const $expirationDate = $task.find("span");
 
+        // Obtendo os valores desses elementos
         const currentDescription = $description.text();
-        const currentExpiration = dayjs($expirationDate.text().replace("Expira em: ", ""), "DD/MM/YYYY").format("YYYY-MM-DD");
+        const currentExpiration = dayjs($expirationDate.text().replace("Expira em: ", ""), "DD/MM/YYYY").format("YYYY-MM-DD"); // Formatando a data que vem em: "Expira em: dia/mês/ano" para "ano-mes-dia"
 
         // Criando os inputs para edição
         const $descriptionInput = $("<input>", {
@@ -190,6 +199,8 @@ $(document).ready(() => {
         const $checkboxDiv = $("<div>", {
             "class": "form-check d-flex align-items-center column-gap-2 checkbox-xl"
         });
+
+        // Gerando um ID único para a checkbox (Para que ao clicar na label marque o checkbox :D)
         const checkboxId = generateRandomId("checkbox_");
         const $checkbox = $("<input>", {
             "class": "form-check-input",
@@ -201,7 +212,11 @@ $(document).ready(() => {
         const $label = $("<label class='form-check-label'></label>").attr("for", checkboxId);
         const $description = $("<p class='fs-6 mb-0'></p>").text(description);
         const $expirationDate = $("<span class='text-secondary'></span>").text(`Expira em: ${expirationDate}`);
-        $label.append($description, ' ', $expirationDate);
+        
+        // Adicionando a descrição e a data de expiração na label
+        $label.append($description, $expirationDate);
+
+        // Adicionando o checkbox e a label na DIV
         $checkboxDiv.append($checkbox, $label);
 
         // Criando os botões de editar e excluir
