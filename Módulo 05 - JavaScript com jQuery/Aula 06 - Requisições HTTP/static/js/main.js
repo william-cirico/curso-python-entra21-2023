@@ -89,7 +89,7 @@ $(document).ready(() => {
         const zipcode = $(this).val();
 
         // Se nenhum CEP tiver sido digitado não realizar a requisição
-        if (!zipcode) return;
+        if (zipcode.length !== 8) return;
 
         // Mudando o ícone do CEP
         $zipcodeIcon.attr("class", "spinner-border spinner-border-sm");
