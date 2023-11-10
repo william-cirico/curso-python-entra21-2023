@@ -3,7 +3,7 @@
  * @param {string} name - Nome que será verificado
  * @returns {boolean}
  */
-const isFullNameValid = (name) => name.length > 4 && name.split(" ").length > 1;
+const isFullNameValid = (name) => name.trim().split(" ").length > 1;
 
 /**
  * Verifica se o CPF é válido
@@ -139,10 +139,11 @@ $(document).ready(() => {
             name: {
                 required: true,
                 fullNameValidator: true, // Validação customizada (linha 138)
+                minlength: 3,
             },
             birthDate: {
                 required: true,
-                min: "1900-01-01"
+                min: "1900-01-01",
             },
             cpf: {
                 required: true,
