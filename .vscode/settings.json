@@ -2,6 +2,7 @@
     "conventionalCommits.scopes": [
         "oop",
         "html",
-        "javascript"
+        "javascript",
+        "database"
     ]
 }
