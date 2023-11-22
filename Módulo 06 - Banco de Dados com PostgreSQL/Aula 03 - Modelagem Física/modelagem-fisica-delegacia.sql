@@ -97,13 +97,13 @@ ADD FOREIGN KEY (vitima_id)
 REFERENCES public.vitimas (id);
 
 -- Renomeando
-ALTER TABLE locais RENAME TO localizacoes;
+-- ALTER TABLE locais RENAME TO localizacoes;
 
 -- Remoção de tabelas
-DROP TABLE localizacoes;
+-- DROP TABLE localizacoes;
 
 -- Remoção de base de dados
-DROP DATABASE delegacia;
+-- DROP DATABASE delegacia;
 
 -- Truncar tabela
-TRUNCATE criminosos RESTART IDENTITY CASCADE;
+-- TRUNCATE criminosos RESTART IDENTITY CASCADE;
