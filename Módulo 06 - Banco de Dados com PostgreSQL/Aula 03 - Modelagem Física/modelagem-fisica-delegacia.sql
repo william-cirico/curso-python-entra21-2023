@@ -8,7 +8,8 @@ CREATE TABLE IF NOT EXISTS public.vitimas (
 	id SERIAL PRIMARY KEY,
 	nome VARCHAR(256) NOT NULL,
 	cpf VARCHAR(11) NOT NULL UNIQUE,
-	telefone VARCHAR(20) NOT NULL
+	telefone VARCHAR(20) NOT NULL,
+	crime_id INT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS public.crimes (
@@ -54,6 +55,12 @@ CREATE TABLE IF NOT EXISTS public.crimes_criminosos (
 
 -- Adicionando as chaves-estrangeiras
 ALTER TABLE IF EXISTS public.locais
+ADD FOREIGN KEY (crime_id)
+REFERENCES public.crimes (id)
+ON UPDATE CASCADE
+ON DELETE CASCADE;
+
+ALTER TABLE IF EXISTS public.vitimas
 ADD FOREIGN KEY (crime_id)
 REFERENCES public.crimes (id)
 ON UPDATE CASCADE
