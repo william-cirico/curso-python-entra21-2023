@@ -112,7 +112,16 @@ SELECT
     COUNT(e.department_id) "Quantidade de Funcionários"
 FROM departments d
 LEFT JOIN employees e ON d.id = e.department_id
-GROUP BY d.name;
+GROUP BY 1;
+
+-- DISTINCT - Remover duplicatas da consulta
+SELECT DISTINCT(age)
+FROM employees;
+
+-- ORDER BY - Ordernar os valores da consulta
+SELECT DISTINCT(age)
+FROM employees
+ORDER BY 1;
 
 -- HAVING - Filtrar por uma função agregadora
 SELECT
