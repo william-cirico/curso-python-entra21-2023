@@ -4,6 +4,12 @@ SELECT * FROM employees;
 -- Selecionando colunas em específico de uma tabela
 SELECT name, age FROM employees;
 
+-- Definindo limite para a consulta
+SELECT name, age FROM employees LIMIT 3;
+
+-- Definindo início para a consulta
+SELECT name, age FROM employees OFFSET 3 LIMIT 3;
+
 -- Selecionando com condições (WHERE)
 SELECT * FROM employees WHERE age > 30;
 
