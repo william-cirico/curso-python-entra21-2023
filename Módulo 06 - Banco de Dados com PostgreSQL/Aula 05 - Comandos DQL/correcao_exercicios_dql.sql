@@ -33,13 +33,13 @@ SELECT * FROM books ORDER BY release_year;
 -- i) Selecione o título do livro mais antigo.
 SELECT title, release_year
 FROM books
-ORDER BY release_year DESC
+ORDER BY release_year 
 LIMIT 1;
 
 -- j) Selecione o título do livro mais recente.
 SELECT title, release_year
 FROM books
-ORDER BY release_year ASC
+ORDER BY release_year DESC
 LIMIT 1;
 
 -- k) Selecione o título e o autor dos três últimos livros na tabela.
