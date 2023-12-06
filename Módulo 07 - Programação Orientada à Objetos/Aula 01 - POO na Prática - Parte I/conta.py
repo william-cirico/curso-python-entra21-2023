@@ -36,7 +36,7 @@ class Conta:
         self.numero = f"{numero[:9]}-{numero[8]}"
 
         # Encapsulamento
-        self.titular = titular
+        self.__titular = titular
         self.__limite = 100
         self.__saldo = 0
 
