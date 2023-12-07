@@ -13,27 +13,21 @@ class Conta:
     """
     __quantidade_contas = 0 # Atributo estático
 
-    def __init__(self, numero: int, titular: str) -> None:
+    def __init__(self, numero: str, titular: str) -> None:
         """
         Inicializa uma conta.
 
         Args:
-            numero (int): Número da conta.
+            numero (str): Número da conta.
             titular (str): Títular da conta.
         
         Raises:
-            TypeError: Se `número` não for inteiro.
             AttributeError: Se `número` não possuir 9 dígitos.
         """
-        if not isinstance(numero, int):
-            raise TypeError("número da conta precisa ser inteiro")
-
-        numero = str(numero)
-
         if len(numero) != 9:
             raise AttributeError("número da conta deve possuir 9 dígitos")
         
-        self.numero = f"{numero[:9]}-{numero[8]}"
+        self.__numero = f"{numero[:9]}-{numero[8]}"
 
         # Encapsulamento
         self.__titular = titular
@@ -41,6 +35,11 @@ class Conta:
         self.__saldo = 0
 
         Conta.__quantidade_contas += 1
+        
+    @property
+    def saldo(self) -> float: # Getter
+        """str: Número da conta."""
+        return self.__numero
 
     @property
     def saldo(self) -> float: # Getter
@@ -118,12 +117,12 @@ class Conta:
 
 
 if __name__ == "__main__":
-    conta = Conta(123456789, "William")
+    conta = Conta("123456789", "William")
     conta.depositar(20)
     conta.exibir_extrato()
     print(f"Quantidade de contas criadas: {Conta.quantidade_contas()}")
 
-    NUMERO_CONTA = 12345678
+    NUMERO_CONTA = "12345678"
     if Conta.numero_conta_valido(NUMERO_CONTA):
         print(f"O número {NUMERO_CONTA} é válido")
     else:
