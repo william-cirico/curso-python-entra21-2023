@@ -26,6 +26,7 @@ class Person:
         
     @property
     def name(self):
+        """str: Nome da pessoa."""
         return self.__name
     
     @name.setter
@@ -37,6 +38,7 @@ class Person:
         
     @property
     def phone(self):
+        """str: Número de telefone."""
         return self.__phone
     
     @phone.setter
@@ -46,10 +48,26 @@ class Person:
 
         self.__phone = phone
         
-    def __is_name_valid(self, nome: str):
-        return len(nome.strip().split()) > 1
+    def __is_name_valid(self, name: str) -> bool:
+        """Verifica se um nome é válido.
+        
+        Args:
+            name (str): Nome que será verificado.
+            
+        Returns:
+            True caso o nome seja composto, False caso não seja.
+        """
+        return len(name.strip().split()) > 1
     
-    def __is_phone_valid(self, phone: str):
+    def __is_phone_valid(self, phone: str) -> bool:
+        """Verifica se um número de telefone é válido.
+        
+        Args:
+            phone (str): Número de telefone que será verificado.
+            
+        Returns:
+            True caso o número de telefone seja válido (Ex.: +55 (47) 9 9999-9999), False em caso contrário.
+        """
         phone_regex = r"\+55\s?(?:\([1-9]{2}\)|[1-9]{2})\s?(?:9\s?\d{4}[-.\s]?\d{4}|\d{4}[-.\s]?\d{4})"
         return re.match(phone_regex, phone)
     
