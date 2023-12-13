@@ -9,7 +9,7 @@ class InvestmentAccount(BankAccount):
         self.__amount_invested = 0
     
     def get_deposit_tax(self) -> float:
-        return 0.8
+        return 0.008
     
     def invest_in_shares(self, amount: float):
         if (self.withdraw(amount)):

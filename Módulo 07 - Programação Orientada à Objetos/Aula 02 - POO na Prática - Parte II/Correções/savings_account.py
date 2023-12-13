@@ -8,7 +8,7 @@ class SavingsAccount(BankAccount):
         self.balance += self.balance * (SavingsAccount.interest_percentage / 100)
     
     def get_deposit_tax(self) -> float:
-        return 0.5
+        return 0.005
     
     
         

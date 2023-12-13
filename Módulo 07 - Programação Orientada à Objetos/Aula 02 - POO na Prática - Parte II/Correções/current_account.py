@@ -31,7 +31,7 @@ class CheckingAccount(BankAccount):
         return True
     
     def get_deposit_tax(self) -> float:
-        return 0.2
+        return 0.002
     
 
 if __name__ == "__main__":
