@@ -23,6 +23,11 @@ class SMSNotificador(INotificador):
     def enviar_notificacao(self, mensagem: str) -> None:
         print(f"Enviando a notificação '{mensagem}' via SMS...")
 
+class WPPNotificador(INotificador):
+    """Implementa a classe concreta de SMSNotificador."""
+    def enviar_notificacao(self, mensagem: str) -> None:
+        print(f"Enviando a notificação '{mensagem}' via WPP...")
+
 class Aplicacao:
     """Implementa a classe de Aplicação."""
     def __init__(self, notificador: INotificador):
@@ -31,3 +36,7 @@ class Aplicacao:
     def enviar_mensagem(self, mensagem: str) -> None:
         """Envia uma mensagem utilizando o notificador."""
         self.notificador.enviar_notificacao(mensagem)
+        
+if __name__ == "__main__":
+    wpp_notificador = WPPNotificador()
+    aplicacao = Aplicacao(wpp_notificador)

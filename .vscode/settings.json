@@ -3,6 +3,7 @@
         "oop",
         "html",
         "javascript",
-        "database"
+        "database",
+        "django"
     ]
 }
