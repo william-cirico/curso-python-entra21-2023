@@ -2,6 +2,12 @@ main {
     height: 100vh;
 }
 
+.btn-sticky-bottom {
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+}
+
 ::-webkit-scrollbar {
     width: 5px;
 }   

@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Cadastro de Fornecedores{% endblock  %}
+{% block head %}
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="{% static 'suppliers/js/createUpdate.js' %}"></script>
+{% endblock  %}
+{% block content %}
+    <h2 class="mb-3">Cadastro de Fornecedores</h2>
+    <form action="{% url 'suppliers:create' %}" method="post">
+        {% csrf_token %}
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="companyNameInput" class="form-label">Razão Social</label>
+                <input type="text" class="form-control" id="companyNameInput" name="company_name">
+            </div>
+            <div class="col-md-6">
+                <label for="fantasyNameInput" class="form-label">Nome Fantasia</label>
+                <input type="text" class="form-control" id="fantasyNameInput" name="fantasy_name">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <label for="cnpjInput" class="form-label">CNPJ</label>
+                <input type="text" class="form-control" id="cnpjInput" name="cnpj">
+            </div>
+            <div class="col-md-4">
+                <label for="phoneInput" class="form-label">Telefone</label>
+                <input type="text" class="form-control" id="phoneInput" name="phone">
+            </div>
+            <div class="col-md-4">
+                <label for="emailInput" class="form-label">E-mail</label>
+                <input type="text" class="form-control" id="emailInput" name="email">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col">
+                <label for="representativeInput" class="form-label">Nome do representante</label>
+                <input type="text" class="form-control" id="representativeInput" name="representative">
+            </div>
+        </div>
+        <h3>Endereço</h3>
+        <hr>
+        <div class="row mb-3">
+            <div class="col-md-3">
+                <label for="zipcodeInput" class="form-label">CEP</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="zipcodeInput" name="zipcode">
+                    <span class="input-group-text">
+                        <i id="zipcodeIcon" class="bi bi-geo-alt"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <label for="streetInput" class="form-label">Rua</label>
+                <input type="text" class="form-control" id="streetInput" name="street">
+            </div>
+            <div class="col-md-2">
+                <label for="numberInput" class="form-label">Número</label>
+                <input type="text" class="form-control" id="numberInput" name="number">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="cityInput" class="form-label">Cidade</label>
+                <input type="text" class="form-control" id="cityInput" name="city">
+            </div>
+            <div class="col-md-6">
+                <label for="stateSelect" class="form-label">Estado</label>
+                <select class="form-control" name="state" id="stateSelect">
+                    {% for code, name in form.state.field.choices %}
+                        <option value="{{ code }}">{{ name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="d-grid">
+            <button class="btn btn-primary btn-lg">Salvar</button>
+        </div>
+    </form>
+{% endblock  %}
