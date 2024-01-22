@@ -18,6 +18,23 @@
     {% block head %}{% endblock %}
   </head>
   <body>
+    <div class="toast-container top-0 end-0 p-3">
+      <!-- Then put toasts within -->
+
+      {% for message in messages %}
+      <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">          
+          <strong class="me-auto">Notificação</strong>
+          <small class="text-body-secondary">agora</small>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+          {{message}}
+        </div>
+      </div>   
+      {% endfor %}     
+    </div>
+
     <div class="container-fluid">
       <div class="row">
         <nav class="col-md-3 col-lg-2 d-none d-md-flex flex-column bg-light sidebar flex-shrink-0 p-3">

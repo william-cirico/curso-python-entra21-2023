@@ -3,14 +3,16 @@ from django.views.decorators.http import require_POST
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.http import JsonResponse
+from django.contrib import messages
+from django.urls import reverse
 from .models import Supplier
 from .forms import SupplierForm
 
 def index(request):
     suppliers = Supplier.objects.order_by("-id")
-    
+        
     # Aplicando a paginação
-    paginator = Paginator(suppliers, 100)
+    paginator = Paginator(suppliers, 2)
     # /fornecedores?page=1 -> Obtendo a página da URL
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
@@ -35,7 +37,7 @@ def search(request):
         .order_by("-id")
     
     # Criando o paginator
-    paginator = Paginator(suppliers, 100)
+    paginator = Paginator(suppliers, 2)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
     
@@ -44,22 +46,58 @@ def search(request):
     return render(request, "index.html", context)
 
 def create(request):
+    form_action = reverse("suppliers:create")
     #POST
     if request.method == 'POST':
         form = SupplierForm(request.POST)
         
         if form.is_valid():
             form.save()
+            
+            messages.success(request, "O fornecedor foi cadastrado com sucesso!")
+            
             return redirect("suppliers:index")
         
-        context = { "form": form }
+        messages.error(request, "Falha ao cadastrar o fornecedor. Verifique o preenchimento dos campos.")
+        
+        context = { "form": form, "form_action": form_action }
         
         return render(request, "create.html", context)
     
     # GET
     form = SupplierForm()
     
-    context = { "form": form }
+    context = { "form": form, "form_action": form_action }
+    
+    return render(request, "create.html", context)
+
+def update(request, slug):
+    supplier = get_object_or_404(Supplier, slug=slug)
+    form_action = reverse("suppliers:update", args=(slug,)) # Obtendo a URL da rota de atualização
+    
+    # POST
+    if request.method == "POST":
+        form = SupplierForm(request.POST, instance=supplier)
+        
+        if form.is_valid():
+            form.save()            
+            messages.success(request, "Fornecedor atualizado com sucesso")            
+            return redirect("suppliers:index")
+        
+        context = {
+            "form_action": form_action,
+            "form": form
+        }
+        
+        return render(request, "create.html", context)
+    
+    # GET
+    form = SupplierForm(instance=supplier)
+    
+    context = {
+        "form_action": form_action,
+        "form": form,
+    }
     
     return render(request, "create.html", context)
 
