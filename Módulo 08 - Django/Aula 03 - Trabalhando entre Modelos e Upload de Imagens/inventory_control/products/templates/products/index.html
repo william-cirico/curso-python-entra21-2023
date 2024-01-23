@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load phone_filter %}
+{% load static %}
+{% block title %}
+  Produtos
+{% endblock %}
+{% block head %}
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+  <script src="{% static 'products/js/index.js' %}"></script>
+{% endblock  %}
+{% block content %}
+  <h2 class="mb-3">Produtos</h2>
+
+  <a 
+    href="{% url 'products:create' %}" 
+    title="Cadastrar novo produto" 
+    class="btn btn-primary btn-sticky-bottom">
+    <i class="bi bi-plus"></i>
+  </a>
+
+  <!-- Filtro -->
+  <form method="get" action="{% url 'products:search' %}" class="row mb-3">
+    <div class="col">
+      <input value="{{ request.GET.q }}" class="form-control" type="text" name="q" placeholder="Buscar" />
+    </div>
+    <div class="col-auto">
+      <button type="submit" class="btn btn-primary">Buscar</button>
+    </div>
+  </form>
+
+  <!-- Tabela de estoque -->
+  <div class="table-responsive">
+    <table class="table table-striped table-sm">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Foto</th>
+          <th>Nome</th>
+          <th>Preço de venda</th>
+          <th>Data de expiração</th>
+          <th>Ativo</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for product in products %}
+          <tr>
+            <td>{{ product.id }}</td>
+            <td>
+              <img class="rounded" heigth="30" width="30" src="{{ product.thumbnail.url }}" alt="Foto do produto: {{product.name}}"> 
+            </td>
+            <td>{{ product.name|title|truncatechars:20 }}</td>
+            <td>R$ {{ product.sale_price|floatformat:2 }}</td>
+            <td>
+              {% if product.is_perishable %}
+                {{product.expiration_date|date:"d/m/Y"}}
+              {% else %}
+                Não perecível
+              {% endif %}
+            </td>
+            <td>
+              <input {% if product.enabled %}checked{% endif %} data-url="{% url 'products:toggle_enabled' product.id %}" type="checkbox" class="form-check-input" />
+            </td>
+            <td class="d-flex gap-1">
+              <a href="{% url 'products:update' product.slug %}" class="btn btn-warning btn-sm" title="editar produto"><i class="bi bi-pencil"></i></a>
+              <form method="post" action="{% url 'products:delete' product.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger btn-sm" title="remover produto"><i class="bi bi-trash"></i></button>
+              </form>
+            </td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="8" class="text-center">Nenhum produto cadastrado.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    
+    <!-- Paginação -->
+    {% if products.paginator.num_pages > 1 %}
+      <nav aria-label="Paginação da página">
+        <ul class="pagination justify-content-end">
+          {% if products.has_previous %}
+            <li class="page-item">
+              <a href="?page={{ products.previous_page_number }}&q={{ request.GET.q }}" class="page-link" aria-label="Anterior">&laquo;</a>
+            </li>
+          {% endif %}
+          <li class="page-item active">
+            <span class="page-link">{{ products.number }}</span>
+          </li>
+          {% if products.has_next %}
+            <li class="page-item">
+              <a href="?page={{ products.next_page_number }}&q={{ request.GET.q }}" class="page-link" aria-label="Próximo">&raquo;</a>
+            </li>
+          {% endif %}
+        </ul>
+      </nav>
+    {% endif %}
+  </div>
+{% endblock %}
