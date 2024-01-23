@@ -8,11 +8,11 @@ import os
 class Product(models.Model):
     name = models.CharField(max_length=255, unique=True)
     description = models.CharField(max_length=255)
-    slug = models.CharField(max_length=255)
-    sale_price = models.FloatField()
+    slug = models.CharField(max_length=255, unique=True)
+    sale_price = models.DecimalField()
     is_perishable = models.BooleanField()
     expiration_date = models.DateField(blank=True, null=True)
-    photo = models.ImageField(upload_to="products")
+    photo = models.ImageField(upload_to="products", blank=True, null=True)
     thumbnail = models.ImageField(upload_to="thumbnails", blank=True)
     enabled = models.BooleanField(default=True)
     
