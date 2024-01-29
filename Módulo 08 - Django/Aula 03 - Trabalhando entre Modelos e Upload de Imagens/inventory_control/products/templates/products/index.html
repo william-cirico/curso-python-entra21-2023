@@ -38,6 +38,7 @@
           <th>Nome</th>
           <th>Preço de venda</th>
           <th>Data de expiração</th>
+          <th>Categoria</th>
           <th>Ativo</th>
           <th>Ações</th>
         </tr>
@@ -47,7 +48,11 @@
           <tr>
             <td>{{ product.id }}</td>
             <td>
-              <img class="rounded" heigth="30" width="30" src="{{ product.thumbnail.url }}" alt="Foto do produto: {{product.name}}"> 
+              {% if product.thumbnail %}
+                <img class="rounded" heigth="30" width="30" src="{{ product.thumbnail.url }}" alt="Foto do produto: {{product.name}}"> 
+              {% else %}
+                Sem foto
+              {% endif %}
             </td>
             <td>{{ product.name|title|truncatechars:20 }}</td>
             <td>R$ {{ product.sale_price|floatformat:2 }}</td>
@@ -59,9 +64,13 @@
               {% endif %}
             </td>
             <td>
+              {{ product.category.name|default:"-" }}
+            </td>
+            <td>
               <input {% if product.enabled %}checked{% endif %} data-url="{% url 'products:toggle_enabled' product.id %}" type="checkbox" class="form-check-input" />
             </td>
             <td class="d-flex gap-1">
+              <button data-url="{% url 'products:suppliers' product.id %}" data-bs-toggle="modal" data-bs-target="#suppliersModal" class="btn btn-primary btn-sm" title="visualizar fornecedores"><i class="bi bi-box"></i></button>
               <a href="{% url 'products:update' product.slug %}" class="btn btn-warning btn-sm" title="editar produto"><i class="bi bi-pencil"></i></a>
               <form method="post" action="{% url 'products:delete' product.id %}">
                 {% csrf_token %}
@@ -76,6 +85,34 @@
         {% endfor %}
       </tbody>
     </table>
+
+    <!-- Modal -->
+    <div class="modal fade" id="suppliersModal" tabindex="-1" aria-labelledby="suppliersModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="suppliersModalLabel">Fornecedores do Produto</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <table class="table table-bordered">
+              <thead>
+                  <tr>
+                      <th>Nome</th>
+                      <th>Preço de Custo</th>
+                  </tr>
+              </thead>
+              <tbody id="suppliersTable">
+
+              </tbody>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+          </div>
+        </div>
+      </div>
+    </div>
     
     <!-- Paginação -->
     {% if products.paginator.num_pages > 1 %}

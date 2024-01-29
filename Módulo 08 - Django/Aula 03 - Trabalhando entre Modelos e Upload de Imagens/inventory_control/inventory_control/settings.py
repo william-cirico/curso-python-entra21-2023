@@ -38,7 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'suppliers.apps.SuppliersConfig',
-    'products.apps.ProductsConfig'
+    'products.apps.ProductsConfig',
+    'api.apps.ApiConfig',
+    'crispy_forms',
+    'crispy_bootstrap5',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -76,11 +80,19 @@ WSGI_APPLICATION = 'inventory_control.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
+import environ
+
+env = environ.Env()
+environ.Env.read_env()
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': env('DB_NAME'),
+        'USER': env('DB_USER'),
+        'PASSWORD': env('DB_PASSWORD'),
+        'HOST': env('DB_HOST'),
+        'PORT': env('DB_PORT'),
     }
 }
 
@@ -136,3 +148,8 @@ MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
 # Configurando arquivos de media para desenvolvimento
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media/"
+
+# Configurando plugin de forms
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
