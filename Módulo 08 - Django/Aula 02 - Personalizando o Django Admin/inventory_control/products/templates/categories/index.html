@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+  Categorias
+{% endblock %}
+{% block head %}
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+  <script src="{% static 'base/js/index.js' %}"></script>
+{% endblock  %}
+{% block content %}
+  <h2 class="mb-3">Categorias</h2>
+
+  <a 
+    href="{% url 'products:category_create' %}" 
+    title="Cadastrar nova categoria" 
+    class="btn btn-primary btn-sticky-bottom">
+    <i class="bi bi-plus"></i>
+  </a>
+
+  <!-- Filtro -->
+  <form method="get" action="{% url 'products:categories_search' %}" class="row mb-3">
+    <div class="col">
+      <input value="{{ request.GET.q }}" class="form-control" type="text" name="q" placeholder="Buscar" />
+    </div>
+    <div class="col-auto">
+      <button type="submit" class="btn btn-primary">Buscar</button>
+    </div>
+  </form>
+
+  <!-- Tabela de estoque -->
+  <div class="table-responsive">
+    <table class="table table-striped table-sm">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for category in categories %}
+          <tr>
+            <td>{{ category.id }}</td>
+            <td>{{ category.name|title }}</td>
+            <td class="d-flex gap-1">
+              <a href="{% url 'products:category_update' category.slug %}" class="btn btn-warning btn-sm" title="editar categoria"><i class="bi bi-pencil"></i></a>
+              <form method="post" action="{% url 'products:category_delete' category.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger btn-sm" title="remover categoria"><i class="bi bi-trash"></i></button>
+              </form>
+            </td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="3" class="text-center">Nenhuma categoria cadastrada.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% comment %}Paginação{% endcomment %}
+    {% if categories.paginator.num_pages > 1 %}
+      <nav aria-label="Paginação da página">
+        <ul class="pagination justify-content-end">
+          {% if categories.has_previous %}
+            <li class="page-item">
+              <a href="?page={{ categories.previous_page_number }}&q={{ request.GET.q }}" class="page-link" aria-label="Anterior">&laquo;</a>
+            </li>
+          {% endif %}
+          <li class="page-item active">
+            <span class="page-link">{{ categories.number }}</span>
+          </li>
+          {% if categories.has_next %}
+            <li class="page-item">
+              <a href="?page={{ categories.next_page_number }}&q={{ request.GET.q }}" class="page-link" aria-label="Próximo">&raquo;</a>
+            </li>
+          {% endif %}
+        </ul>
+      </nav>
+    {% endif %}
+  </div>
+{% endblock %}

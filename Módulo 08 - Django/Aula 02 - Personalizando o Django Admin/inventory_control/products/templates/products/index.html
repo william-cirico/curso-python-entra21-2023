@@ -10,6 +10,34 @@
 {% endblock  %}
 {% block content %}
   <h2 class="mb-3">Produtos</h2>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="suppliersModal" tabindex="-1" aria-labelledby="suppliersModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="suppliersModalLabel">Fornecedores</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Preço de custo</th>
+              </tr>
+            </thead>
+            <tbody id="suppliersTableBody">
+
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <a 
     href="{% url 'products:create' %}" 
@@ -36,6 +64,7 @@
           <th>ID</th>
           <th>Foto</th>
           <th>Nome</th>
+          <th>Categoria</th>
           <th>Preço de venda</th>
           <th>Data de expiração</th>
           <th>Ativo</th>
@@ -54,6 +83,7 @@
               {% endif %}
             </td>
             <td>{{ product.name|title|truncatechars:20 }}</td>
+            <td>{{ product.category.name|title|default:"Sem categoria" }}</td>
             <td>R$ {{ product.sale_price|floatformat:2 }}</td>
             <td>
               {% if product.is_perishable %}
@@ -66,6 +96,9 @@
               <input {% if product.enabled %}checked{% endif %} data-url="{% url 'products:toggle_enabled' product.id %}" type="checkbox" class="form-check-input" />
             </td>
             <td class="d-flex gap-1">
+              <button title="fornecedores do produto" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#suppliersModal">
+                <i class="bi bi-box"></i>
+              </button>
               <a href="{% url 'products:update' product.slug %}" class="btn btn-warning btn-sm" title="editar produto"><i class="bi bi-pencil"></i></a>
               <form method="post" action="{% url 'products:delete' product.id %}">
                 {% csrf_token %}

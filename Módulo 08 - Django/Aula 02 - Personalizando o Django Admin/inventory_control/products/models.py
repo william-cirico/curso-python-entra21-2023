@@ -4,7 +4,23 @@ from django.db import models
 from django.utils.text import slugify
 from PIL import Image
 from django.core.files.base import ContentFile
+from suppliers.models import Supplier
 
+class Category(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    slug = models.SlugField(unique=True, blank=True)
+    description = models.TextField()
+    
+    def __str__(self):
+        return self.name
+    
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Category, self).save(*args, **kwargs)
+    
+    class Meta:
+        verbose_name = "Categoria"
+        verbose_name_plural = "Categorias"        
 
 class Product(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -14,9 +30,15 @@ class Product(models.Model):
     is_perishable = models.BooleanField()
     expiration_date = models.DateField(blank=True, null=True)
     photo = models.ImageField(upload_to="products", blank=True, null=True)
-    thumbnail = models.ImageField(
-        upload_to="thumbnails", blank=True, null=True)
+    thumbnail = models.ImageField(upload_to="thumbnails", blank=True, null=True)
     enabled = models.BooleanField(default=True)
+    category = models.ForeignKey(Category, on_delete=models.DO_NOTHING, null=True, blank=True)
+    suppliers = models.ManyToManyField(
+        Supplier,
+        through="SupplierProduct",
+        through_fields=("product", "supplier"),
+        blank=True
+    )
 
     def __str__(self):
         return self.name
@@ -24,6 +46,15 @@ class Product(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         self.__update_is_perishable()
+        
+        # Removendo imagens antigs
+        if self.pk:
+            old_obj = Product.objects.filter(pk=self.pk).first()
+            if old_obj and old_obj.photo != self.photo:
+                self.__delete_file_if_exists(old_obj.photo)
+            if old_obj and old_obj.thumbnail:
+                self.__delete_file_if_exists(old_obj.thumbnail)
+            
         super(Product, self).save(*args, **kwargs)
 
         # Criando a thumbnail
@@ -65,3 +96,14 @@ class Product(models.Model):
     class Meta:
         verbose_name = "Produto"
         verbose_name_plural = "Produtos"
+
+
+class SupplierProduct(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE)
+    cost_price = models.DecimalField(max_digits=8, decimal_places=2)
+    
+    class Meta:
+        verbose_name = "Fornecedor do Produto"
+        verbose_name_plural = "Fornecedores do Produto"
+        unique_together = [["supplier", "product"]]        
