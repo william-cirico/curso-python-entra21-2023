@@ -1,33 +1,39 @@
 {% extends "base.html" %} 
 {% load static %} 
 {% load crispy_forms_tags %}
-{% block title %}Cadastro de Produtos{% endblock %} 
+{% block title %}
+  Cadastro de Produtos
+{% endblock %} 
 {% block head %}
-  <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
-  <script src="{% static 'products/createUpdate.js' %}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>  
+  <script src="{% static 'products/js/createUpdate.js' %}"></script>
 {% endblock  %}
-{% block content %}
-  {% with create_url="/produtos/cadastro/" %}
+{% block content %} 
+  {% with create_url="/produtos/cadastro/"%} 
     {% if form_action == create_url %}
       <h2 class="mb-3">Cadastro de Produtos</h2>
     {% else %}
       <h2 class="mb-3">Edição de Produto</h2>
     {% endif %}
-    <form action="{{ form_action }}" method="post" enctype="multipart/form-data" novalidate>
+    <form method="post" action="{{ form_action }}"  enctype="multipart/form-data">
+      {% if form.non_field_errors %}
+        <div class="alert alert-danger">
+          <ul class="mb-0">
+            {% for error in form.non_field_errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %} 
       {% csrf_token %}
-
       <div class="row mb-3">
         <div class="col">
           {{ form.name|as_crispy_field }}
         </div>
       </div>
-
       <div class="row mb-3">
-        <div class="col">
-          {{ form.description|as_crispy_field }}
-        </div>
+        {{ form.description|as_crispy_field }}
       </div>
-
       <div class="row mb-3">
         <div class="col-md-4">
           {{ form.category|as_crispy_field }}
@@ -39,49 +45,44 @@
           {{ form.expiration_date|as_crispy_field }}
         </div>
       </div>
-
-      <div class="row mb-3">
-        <div class="col">
-          {{ form.photo|as_crispy_field }}
-        </div>
+      
+      <div class="d-grid mb-3">
+        {{ form.photo|as_crispy_field }}
       </div>
 
       <h3>Fornecedores</h3>
       <div id="supplierFormset">
         {{ supplier_product_formset.management_form }}
-        {% for supplier in supplier_product_formset  %}
-          <div class="row mb-3">
-            {{ supplier.id }}
+        {% for form in supplier_product_formset %}
+          <div class="row">
+            {{ form.id }}
             <div class="col-md-5">
-              {{ supplier.supplier|as_crispy_field }}
+              {{ form.supplier|as_crispy_field }}
             </div>
             <div class="col-md-5">
-              {{ supplier.cost_price|as_crispy_field }}
+              {{ form.cost_price|as_crispy_field }}
             </div>
             <div class="col-md-2">
               <div class="d-grid">
-                <button type="button" class="btn btn-danger remove-btn">
+                <button                   
+                  type="button" 
+                  class="btn btn-danger remove-btn"
+                >
                   <i class="bi bi-x"></i>
                 </button>
               </div>
             </div>
           </div>
-        {% endfor %}        
+        {% endfor %}
       </div>
 
       <div class="d-grid mb-3">
         <button type="button" id="addSupplierButton" class="btn btn-outline-secondary">Adicionar fornecedor</button>
       </div>
 
-      <div class="row mb-3">
-        <div class="col">
-          {{ form.enabled|as_crispy_field }}
-        </div>
-      </div>
-
       <div class="d-grid">
         <button type="submit" class="btn btn-primary btn-lg">Salvar</button>
       </div>
     </form>
-  {% endwith %}
+  {% endwith %} 
 {% endblock %}

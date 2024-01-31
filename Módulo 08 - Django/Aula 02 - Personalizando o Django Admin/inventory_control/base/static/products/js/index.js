@@ -14,8 +14,8 @@ jQuery(function() {
 
                 suppliers.forEach(supplier => {
                     const $row = $("<tr></tr>");
-                    $row.append(("<td>").text(supplier.name));
-                    $row.append(("<td>").text(supplier.cost_price));
+                    $row.append($("<td>").text(supplier.name));
+                    $row.append($("<td>").text(supplier.cost_price));
 
                     $suppliersTableBody.append($row);
                 })

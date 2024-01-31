@@ -7,6 +7,7 @@
 {% block head %}
   <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
   <script src="{% static 'base/js/index.js' %}"></script>
+  <script src="{% static 'products/js/index.js' %}"></script>
 {% endblock  %}
 {% block content %}
   <h2 class="mb-3">Produtos</h2>
@@ -96,7 +97,7 @@
               <input {% if product.enabled %}checked{% endif %} data-url="{% url 'products:toggle_enabled' product.id %}" type="checkbox" class="form-check-input" />
             </td>
             <td class="d-flex gap-1">
-              <button title="fornecedores do produto" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#suppliersModal">
+              <button data-url="{% url "products:suppliers" product.id %}" title="fornecedores do produto" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#suppliersModal">
                 <i class="bi bi-box"></i>
               </button>
               <a href="{% url 'products:update' product.slug %}" class="btn btn-warning btn-sm" title="editar produto"><i class="bi bi-pencil"></i></a>
