@@ -1,0 +1,8 @@
+<form method="get" action="{% url search_url %}" class="row mb-3">
+    <div class="col">
+      <input value="{{ request.GET.q }}" class="form-control" type="text" name="q" placeholder="Buscar" />
+    </div>
+    <div class="col-auto">
+      <button type="submit" class="btn btn-primary">Buscar</button>
+    </div>
+</form>

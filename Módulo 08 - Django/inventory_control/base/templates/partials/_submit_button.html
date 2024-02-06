@@ -1,0 +1,21 @@
+<div class="d-grid">
+    <button id="submitButton" type="submit" class="btn btn-primary btn-lg">
+        <span style="display: none;" id="loadingSpinner" class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+        <span id="buttonText" role="status">Salvar</span>
+    </button>
+</div>
+<script>
+    jQuery(function() {
+        $("#submitButton").on("click", function() {
+            $button = $(this);
+    
+            $button.prop("disabled", true);
+            
+            $("#buttonText").text("Carregando...")
+    
+            $("#loadingSpinner").show();
+
+            $("form").submit();
+        });
+    });
+</script>

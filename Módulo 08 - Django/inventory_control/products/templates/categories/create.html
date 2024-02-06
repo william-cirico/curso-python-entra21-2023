@@ -1,0 +1,24 @@
+{% extends "base.html" %} 
+{% load static %} 
+{% load crispy_forms_tags %}
+{% block title %}
+  Cadastro de Categorias
+{% endblock %}
+{% block content %} 
+  <h2 class="mb-3">Cadastro de Categorias</h2>
+  <form method="post">
+    {% include "partials/_form_non_field_errors.html" %}
+
+    {% csrf_token %}
+    <div class="row mb-3">
+      <div class="col">
+        {{ form.name|as_crispy_field }}
+      </div>
+    </div>
+    <div class="row mb-3">
+      {{ form.description|as_crispy_field }}
+    </div>
+
+    {% include "partials/_submit_button.html" %}
+  </form>
+{% endblock %}

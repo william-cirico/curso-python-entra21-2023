@@ -1,0 +1,17 @@
+{% extends "base.html" %} 
+{% load static %} 
+{% load crispy_forms_tags %}
+{% block title %}
+  Cadastro de Usuário
+{% endblock %}
+{% block content %} 
+    <h2 class="mb-3">Cadastro de Usuários</h2>
+    <form method="post">
+      {% include "partials/_form_non_field_errors.html" %}
+      {% csrf_token %}
+      
+      {{ form|crispy }}
+
+      {% include "partials/_submit_button.html" %}
+    </form>
+{% endblock %}
