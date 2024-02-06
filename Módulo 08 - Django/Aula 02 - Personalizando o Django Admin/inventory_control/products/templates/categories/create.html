@@ -1,0 +1,32 @@
+{% extends "base.html" %} 
+{% load static %} 
+{% load crispy_forms_tags %}
+{% block title %} Categorias{% endblock %} 
+{% block content %}
+  {% with create_url="/produtos/categorias/cadastro/" %}
+    {% if form_action == create_url %}
+      <h2 class="mb-3">Cadastro de Categorias</h2>
+    {% else %}
+      <h2 class="mb-3">Edição de Categoria</h2>
+    {% endif %}
+    <form action="{{ form_action }}" method="post" novalidate>
+      {% csrf_token %}
+
+      <div class="row mb-3">
+        <div class="col">
+          {{ form.name|as_crispy_field }}
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col">
+          {{ form.description|as_crispy_field }}
+        </div>
+      </div>
+
+      <div class="d-grid">
+        <button class="btn btn-primary btn-lg">Salvar</button>
+      </div>
+    </form>
+  {% endwith %}
+{% endblock %}
